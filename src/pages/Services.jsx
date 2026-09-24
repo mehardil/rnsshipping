@@ -143,6 +143,19 @@ export default function Services() {
       />
 
       <section className="page-hero page-hero--media">
+        <video
+          className="page-hero__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/images/hero-poster.jpg"
+          aria-hidden="true"
+        >
+          <source src="/videos/drydock.mp4" type="video/mp4" />
+        </video>
+        <div className="page-hero__overlay" />
         <div className="container">
           <span className="eyebrow">Our Services</span>
           <h1>Comprehensive Marine Services &amp; Solutions</h1>
