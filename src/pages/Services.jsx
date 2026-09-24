@@ -4,7 +4,7 @@ import Seo from '../components/Seo'
 import Reveal from '../components/Reveal'
 import { Icon } from '../components/Icons'
 import { services, faqs } from '../data/site'
-import { animateSplitHeading, disposeAll, gsap, mm, prefersReducedMotion, ScrollTrigger } from '../lib/anim'
+import { animateSplitHeading, disposeAll, flyIn, gsap, mm, prefersReducedMotion, ScrollTrigger } from '../lib/anim'
 
 export default function Services() {
   const { hash } = useLocation()
@@ -72,6 +72,46 @@ export default function Services() {
           scrollTrigger: { trigger: list, start: 'top 85%', once: true },
         })
       })
+
+      /* on-site expertise media stack: fly-in, curtain zoom, floating badge */
+      gsap.utils.toArray('.media-stack').forEach((el) => {
+        cleanups.push(flyIn(el, { from: 'left', distance: 160, start: 'top 85%', end: 'top 40%', scrub: 1.2 }))
+      })
+
+      gsap.utils.toArray('.media-stack__main img').forEach((el) =>
+        cleanups.push(
+          gsap.fromTo(
+            el,
+            { yPercent: -6, scale: 1.08 },
+            {
+              yPercent: 6,
+              scale: 1.08,
+              ease: 'none',
+              scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true },
+            }
+          )
+        )
+      )
+
+      gsap.utils.toArray('.media-stack__inset').forEach((el) => {
+        gsap.set(el, { clipPath: 'inset(0 0 100% 0)' })
+        cleanups.push(
+          gsap.to(el, {
+            clipPath: 'inset(0 0 0% 0)',
+            duration: 1,
+            delay: 0.25,
+            ease: 'power4.out',
+            immediateRender: false,
+            scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+          })
+        )
+      })
+
+      gsap.utils.toArray('.media-stack__badge').forEach((el, i) =>
+        cleanups.push(
+          gsap.to(el, { y: -8, rotate: i ? -2 : 2, duration: 1.9 + i * 0.2, yoyo: true, repeat: -1, ease: 'sine.inOut' })
+        )
+      )
 
       /* Desktop (>=1200px): sticky cascading service deck + serial highlight */
       cleanups.push(
@@ -201,6 +241,65 @@ export default function Services() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ---------------- ON-SITE EXPERTISE ---------------- */}
+      <section className="section">
+        <div className="container split split--reverse">
+          <div className="split__media">
+            <Reveal className="media-stack">
+              <div className="media-stack__main">
+                <img
+                  src="/images/ship-technical.png"
+                  alt="RNS Shipping engineers carrying out technical servicing aboard a vessel"
+                  loading="lazy"
+                />
+              </div>
+              <div className="media-stack__inset">
+                <img src="/images/ship-2.jpg" alt="Marine engineers at work on deck" loading="lazy" />
+              </div>
+              <div className="media-stack__badge">
+                <b>24/7</b>
+                <span>On-Site Support</span>
+              </div>
+            </Reveal>
+          </div>
+          <div>
+            <Reveal>
+              <span className="eyebrow">On-Site Expertise</span>
+              <h2>Technical Teams That Keep Your Vessel Moving</h2>
+              <p className="lead">
+                From routine maintenance to urgent repairs, our engineers mobilise to your vessel —
+                alongside in Dubai, Jebel Ali or at anchor off Khorfakkan — with the parts and tools
+                to get the job done.
+              </p>
+              <ul className="checklist">
+                <li>
+                  <span>
+                    <strong style={{ color: 'var(--heading)' }}>Certified technicians</strong> —
+                    experienced marine engineers across all four divisions.
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <strong style={{ color: 'var(--heading)' }}>Rapid mobilisation</strong> — teams
+                    on site within hours for urgent requirements.
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <strong style={{ color: 'var(--heading)' }}>Global spares network</strong> —
+                    Caterpillar, Yanmar and critical components sourced fast.
+                  </span>
+                </li>
+              </ul>
+              <Link to="/contact" className="btn btn--primary mt-40">
+                Talk to an Engineer
+                <Icon name="arrow" size={18} className="btn__arrow" />
+              </Link>
+            </Reveal>
+          </div>
         </div>
       </section>
 

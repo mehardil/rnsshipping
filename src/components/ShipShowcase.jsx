@@ -42,9 +42,6 @@ export default function ShipShowcase() {
         </div>
 
         <div className="showcase__visual">
-          <div className="showcase__ring" aria-hidden="true">
-            <img src="/images/rns-circle.webp" alt="" loading="lazy" />
-          </div>
           <img
             className="showcase__ship"
             src="/images/rns-ship-side.webp"

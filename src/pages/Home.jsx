@@ -214,33 +214,6 @@ export default function Home() {
           cleanups.push(() => floatTween?.kill())
         }
 
-        /* Rotating dashed ring behind the vessel */
-        const ring = document.querySelector('.showcase__ring')
-        if (ring) {
-          cleanups.push(
-            gsap.to(ring, {
-              rotate: 360,
-              duration: 60,
-              repeat: -1,
-              ease: 'none',
-              transformOrigin: '50% 50%',
-            })
-          )
-          cleanups.push(
-            gsap.fromTo(
-              ring,
-              { scale: 0.7, opacity: 0 },
-              {
-                scale: 1,
-                opacity: 1,
-                duration: 1.2,
-                ease: 'power3.out',
-                scrollTrigger: { trigger: '.showcase__visual', start: 'top 82%', once: true },
-              }
-            )
-          )
-        }
-
         q('.showcase__chip').forEach((el, i) => {
           gsap.set(el, { scale: 0.6, opacity: 0 })
           cleanups.push(

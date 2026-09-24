@@ -1840,22 +1840,6 @@
   place-items: center;
   min-height: 400px;
 }
-.showcase__ring {
-  position: absolute;
-  z-index: 0;
-  width: min(120%, 560px);
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  opacity: 0;
-  will-change: transform;
-}
-.showcase__ring img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: 0.5;
-}
 .showcase__ship {
   position: relative;
   z-index: 1;
@@ -1899,9 +1883,6 @@
   }
   .showcase__visual {
     min-height: 320px;
-  }
-  .showcase__ring {
-    width: min(128%, 460px);
   }
   .showcase__ship {
     width: min(100%, 440px);

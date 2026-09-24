@@ -323,7 +323,7 @@ export function flyIn(
   const el = resolveEl(target)
   if (!el || prefersReducedMotion) return () => {}
 
-  const fromVars = { opacity: 0 }
+  const fromVars = { opacity: 0, x: 0, y: 0, scale: 1 }
   if (from === 'left') fromVars.x = -distance
   else if (from === 'right') fromVars.x = distance
   else if (from === 'top') {
@@ -334,12 +334,16 @@ export function flyIn(
     fromVars.scale = 0.2
   }
 
-  const tween = gsap.from(el, {
-    ...fromVars,
+  /* fromTo with explicit end values: gsap.from() would capture the current
+   * (often CSS-hidden, e.g. .reveal) opacity as the destination, leaving the
+   * element stuck invisible when inline styles beat the reveal class. */
+  const tween = gsap.fromTo(el, fromVars, {
+    opacity: 1,
+    x: 0,
+    y: 0,
     scale,
     duration: 1,
     ease: 'power2.out',
-    immediateRender: false,
     scrollTrigger: { trigger: el, start, end, scrub },
   })
 
