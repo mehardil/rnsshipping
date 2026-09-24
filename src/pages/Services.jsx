@@ -1,175 +1,18 @@
-import { useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
 import Reveal from '../components/Reveal'
 import { Icon } from '../components/Icons'
 import { services, faqs } from '../data/site'
-import { animateSplitHeading, disposeAll, flyIn, gsap, mm, prefersReducedMotion, ScrollTrigger } from '../lib/anim'
 
 export default function Services() {
-  const { hash } = useLocation()
-
-  useEffect(() => {
-    if (hash) {
-      const el = document.getElementById(hash.slice(1))
-      if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60)
-      }
-    }
-  }, [hash])
-
-  /* Services-only scroll flow */
-  useEffect(() => {
-    if (prefersReducedMotion) return
-
-    const cleanups = []
-    const ctx = gsap.context(() => {
-      /* big service numbers drift against scroll */
-      gsap.utils.toArray('.service-detail__num').forEach((el) =>
-        cleanups.push(
-          gsap.fromTo(
-            el,
-            { yPercent: 14 },
-            { yPercent: -14, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } }
-          )
-        )
-      )
-
-      /* media frames: curtain unmask + slow zoom */
-      gsap.utils.toArray('.service-detail .frame').forEach((frame, i) => {
-        const img = frame.querySelector('img')
-        gsap.set(img, { scale: 1.16, yPercent: -6 })
-        cleanups.push(
-          gsap.to(img, {
-            scale: 1,
-            yPercent: 0,
-            ease: 'none',
-            scrollTrigger: { trigger: frame, start: 'top bottom', end: 'bottom top', scrub: true },
-          })
-        )
-        gsap.from(frame, {
-          clipPath: 'inset(0 0 100% 0)',
-          duration: 1.1,
-          ease: 'power4.inOut',
-          delay: (i % 2) * 0.05,
-          scrollTrigger: { trigger: frame, start: 'top 80%', once: true },
-        })
-      })
-
-      /* split headings in detail blocks */
-      gsap.utils.toArray('.service-detail h2').forEach((el) => {
-        cleanups.push(animateSplitHeading(el))
-      })
-
-      /* checklist items stagger in */
-      gsap.utils.toArray('.service-detail .checklist').forEach((list) => {
-        gsap.from(list.children, {
-          y: 22,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.06,
-          ease: 'power3.out',
-          scrollTrigger: { trigger: list, start: 'top 85%', once: true },
-        })
-      })
-
-      /* on-site expertise media stack: fly-in, curtain zoom, floating badge */
-      gsap.utils.toArray('.media-stack').forEach((el) => {
-        cleanups.push(flyIn(el, { from: 'left', distance: 160, start: 'top 85%', end: 'top 40%', scrub: 1.2 }))
-      })
-
-      gsap.utils.toArray('.media-stack__main img').forEach((el) =>
-        cleanups.push(
-          gsap.fromTo(
-            el,
-            { yPercent: -6, scale: 1.08 },
-            {
-              yPercent: 6,
-              scale: 1.08,
-              ease: 'none',
-              scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true },
-            }
-          )
-        )
-      )
-
-      gsap.utils.toArray('.media-stack__inset').forEach((el) => {
-        gsap.set(el, { clipPath: 'inset(0 0 100% 0)' })
-        cleanups.push(
-          gsap.to(el, {
-            clipPath: 'inset(0 0 0% 0)',
-            duration: 1,
-            delay: 0.25,
-            ease: 'power4.out',
-            immediateRender: false,
-            scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-          })
-        )
-      })
-
-      gsap.utils.toArray('.media-stack__badge').forEach((el, i) =>
-        cleanups.push(
-          gsap.to(el, { y: -8, rotate: i ? -2 : 2, duration: 1.9 + i * 0.2, yoyo: true, repeat: -1, ease: 'sine.inOut' })
-        )
-      )
-
-      /* Desktop (>=1200px): sticky cascading service deck + serial highlight */
-      cleanups.push(
-        mm('(min-width: 1200px)', () => {
-          const items = gsap.utils.toArray('.services-deck .service-detail')
-
-          items.forEach((el, i) => {
-            const num = el.querySelector('.service-detail__num')
-            ScrollTrigger.create({
-              trigger: el,
-              start: 'top 42%',
-              end: 'bottom 42%',
-              onToggle: (self) => {
-                if (num) num.classList.toggle('active', self.isActive)
-              },
-            })
-
-            /* each card eases in as the deck scrolls (Logiver scrub stagger) */
-            gsap.from(el, {
-              y: -80,
-              opacity: 0,
-              duration: 1,
-              transformOrigin: 'top',
-              ease: 'power2.out',
-              immediateRender: false,
-              scrollTrigger: {
-                trigger: el,
-                start: 'top 95%',
-                end: 'top 60%',
-                scrub: 1,
-              },
-            })
-
-            /* subtle horizontal cascade depth */
-            gsap.set(el, { xPercent: i * 1.6 })
-          })
-
-          return () => {
-            items.forEach((el) => el.querySelector('.service-detail__num')?.classList.remove('active'))
-          }
-        })
-      )
-    })
-
-    return () => {
-      disposeAll(cleanups)
-      ctx.revert()
-    }
-  }, [])
-
   return (
     <>
       <Seo
-        title="Marine Services in Dubai & Khorfakkan | Ship Repair, Chandelling & Logistics"
+        title="Marine Services in Dubai & Khorfakkan"
         description="RNS Shipping services: technical servicing and ship repair, ship chandelling, ship spare parts logistics, and marine automation across Dubai, Jebel Ali and Khorfakkan, UAE."
         path="/services"
         keywords="ship repair services Dubai, marine engineering Jebel Ali, ship chandelling Dubai, ship spare parts logistics UAE, marine automation Dubai"
-        image="/images/ship-technical.png"
+        image="/images/ship-technical-optimized.webp"
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'ItemList',
@@ -177,6 +20,7 @@ export default function Services() {
             '@type': 'ListItem',
             position: i + 1,
             name: s.title,
+            url: `https://rnsshipping.com/services/${s.slug}`,
             description: s.short,
           })),
         }}
@@ -185,11 +29,10 @@ export default function Services() {
       <section className="page-hero page-hero--media">
         <video
           className="page-hero__video"
-          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           poster="/images/hero-poster.jpg"
           aria-hidden="true"
         >
@@ -208,6 +51,8 @@ export default function Services() {
           </nav>
         </div>
       </section>
+
+      <nav className="service-index container" aria-label="Service divisions">{services.map(s => <a key={s.slug} href={`#${s.slug}`}>{s.title}<Icon name="arrow" size={16} /></a>)}</nav>
 
       <section className="section">
         <div className="container services-deck">
@@ -233,7 +78,8 @@ export default function Services() {
                       </li>
                     ))}
                   </ul>
-                  <Link to="/contact" className="btn btn--primary mt-40">
+                  <Link to={`/services/${s.slug}`} className="text-link service-guide-link">Explore {s.title} <Icon name="arrow" size={18} /></Link>
+                  <Link to={`/contact?service=${encodeURIComponent(s.title)}`} className="btn btn--primary mt-40">
                     Enquire About {s.title}
                     <Icon name="arrow" size={18} className="btn__arrow" />
                   </Link>
@@ -251,13 +97,13 @@ export default function Services() {
             <Reveal className="media-stack">
               <div className="media-stack__main">
                 <img
-                  src="/images/ship-technical.png"
+                  src="/images/ship-technical-optimized.webp"
                   alt="RNS Shipping engineers carrying out technical servicing aboard a vessel"
                   loading="lazy"
                 />
               </div>
               <div className="media-stack__inset">
-                <img src="/images/ship-2.jpg" alt="Marine engineers at work on deck" loading="lazy" />
+                <img src="/images/technical-gear-optimized.webp" alt="Marine mechanical components and precision gear assembly" loading="lazy" />
               </div>
               <div className="media-stack__badge">
                 <b>24/7</b>

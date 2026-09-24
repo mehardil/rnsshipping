@@ -47,7 +47,7 @@ export const services = [
     title: 'Technical Servicing',
     short:
       'Comprehensive maintenance and repair solutions carried out by experienced marine engineers and technicians.',
-    image: '/images/rns-port-cranes.webp',
+    image: '/images/ship-technical-optimized.webp',
     icon: 'wrench',
     intro:
       'Our comprehensive technical servicing ensures your vessel operates at peak performance and reliability. We offer a wide range of maintenance and repair solutions carried out by experienced marine engineers and technicians.',
@@ -110,7 +110,7 @@ export const services = [
     title: 'Marine Automation',
     short:
       'Advanced automation solutions that enhance vessel efficiency, safety and performance.',
-    image: '/images/rns-ship-bow.webp',
+    image: '/images/technical-gear-optimized.webp',
     icon: 'automation',
     intro:
       'We deliver advanced marine automation solutions designed to enhance vessel efficiency, safety and performance. Our team provides installation, maintenance and troubleshooting of automated systems critical to ship operations.',

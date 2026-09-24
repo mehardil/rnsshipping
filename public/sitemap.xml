@@ -20,4 +20,8 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url><loc>https://rnsshipping.com/services/technical-services</loc></url>
+  <url><loc>https://rnsshipping.com/services/ship-chandelling</loc></url>
+  <url><loc>https://rnsshipping.com/services/spare-parts-logistics</loc></url>
+  <url><loc>https://rnsshipping.com/services/automation</loc></url>
 </urlset>

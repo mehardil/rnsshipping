@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Navigation, Pagination } from 'swiper/modules'
+import { A11y, Navigation, Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
@@ -20,12 +20,11 @@ export default function Testimonials() {
   return (
     <div className="testi">
       <Swiper
-        modules={[Autoplay, Navigation, Pagination]}
+        modules={[A11y, Navigation, Pagination]}
         spaceBetween={24}
         slidesPerView={1}
-        speed={1000}
-        loop
-        autoplay={{ delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true }}
+        speed={450}
+        a11y={{ enabled: true }}
         navigation={{ nextEl: '.testi__next', prevEl: '.testi__prev' }}
         pagination={{ el: '.testi__pagi', clickable: true }}
         breakpoints={{
@@ -38,7 +37,7 @@ export default function Testimonials() {
         {testimonials.map((t) => (
           <SwiperSlide key={`${t.name}-${t.role}`}>
             <article className="testi-card">
-              <div className="testi-card__stars" aria-label="5 out of 5 stars">
+              <div className="testi-card__stars" role="img" aria-label="5 out of 5 stars">
                 {[0, 1, 2, 3, 4].map((s) => (
                   <Icon key={s} name="star" size={16} />
                 ))}

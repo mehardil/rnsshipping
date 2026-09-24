@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
 import Reveal from '../components/Reveal'
@@ -6,106 +5,8 @@ import Counter from '../components/Counter'
 import ClientMarquee from '../components/ClientMarquee'
 import { Icon } from '../components/Icons'
 import { company, stats, whyChoose, certifications, services } from '../data/site'
-import {
-  animateSplitHeading,
-  disposeAll,
-  flyIn,
-  gsap,
-  lineDropReveal,
-  prefersReducedMotion,
-  scrubCharsReveal,
-} from '../lib/anim'
 
 export default function About() {
-  /* About-only scroll flow */
-  useEffect(() => {
-    if (prefersReducedMotion) return
-
-    const cleanups = []
-    const ctx = gsap.context(() => {
-      gsap.utils.toArray('.split__content h2').forEach((el) => {
-        cleanups.push(animateSplitHeading(el))
-      })
-
-      gsap.utils.toArray('.section-head h2').forEach((el) => {
-        cleanups.push(scrubCharsReveal(el))
-      })
-
-      /* story paragraphs drop line by line */
-      gsap.utils.toArray('.split__content p').forEach((el) => {
-        cleanups.push(lineDropReveal(el))
-      })
-
-      /* media stack flies in from the left, inset from the right */
-      gsap.utils.toArray('.media-stack').forEach((el) => {
-        cleanups.push(flyIn(el, { from: 'left', distance: 160, start: 'top 85%', end: 'top 40%', scrub: 1.2 }))
-      })
-
-      /* value cards alternate directions */
-      gsap.utils.toArray('.why-card').forEach((el, i) => {
-        cleanups.push(
-          flyIn(el, {
-            from: i % 2 === 0 ? 'left' : 'right',
-            distance: 140,
-            start: 'top 88%',
-            end: 'top 50%',
-            scrub: 1.2,
-          })
-        )
-      })
-
-      gsap.utils.toArray('.media-stack__main img').forEach((el) =>
-        cleanups.push(
-          gsap.fromTo(
-            el,
-            { yPercent: -6, scale: 1.06 },
-            { yPercent: 6, scale: 1.06, ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: true } }
-          )
-        )
-      )
-
-      gsap.utils.toArray('.media-stack__inset').forEach((el) => {
-        cleanups.push(
-          gsap.from(el, {
-            y: 60,
-            opacity: 0,
-            duration: 1,
-            delay: 0.25,
-            ease: 'power3.out',
-            immediateRender: false,
-            scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-          })
-        )
-      })
-
-      gsap.utils.toArray('.media-stack__badge').forEach((el, i) =>
-        cleanups.push(
-          gsap.to(el, { y: -7, duration: 1.9 + i * 0.2, yoyo: true, repeat: -1, ease: 'sine.inOut' })
-        )
-      )
-
-      /* CTA slide-up */
-      cleanups.push(
-        gsap.fromTo(
-          '.cta',
-          { clipPath: 'inset(0 0 100% 0)' },
-          {
-            clipPath: 'inset(0 0 0% 0)',
-            duration: 1.1,
-            ease: 'power4.out',
-            immediateRender: false,
-            scrollTrigger: { trigger: '.cta', start: 'top 82%', once: true },
-          }
-        )
-      )
-    })
-
-    return () => {
-      disposeAll(cleanups)
-      ctx.revert()
-    }
-  }, [])
-
   return (
     <>
       <Seo
@@ -113,7 +14,7 @@ export default function About() {
         description="RNS Shipping is a UAE-based marine service company with 35+ years of seafaring and technical experience in ship repairs, maintenance and marine supplies across Jebel Ali, Dubai and Khorfakkan."
         path="/about"
         keywords="marine service company Dubai, ship repair company in Dubai, marine engineering Khorfakkan, RNS Shipping"
-        image="/images/ship-1.jpg"
+        image="/images/harbour-evening.webp"
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
@@ -123,7 +24,7 @@ export default function About() {
         }}
       />
 
-      <section className="page-hero">
+      <section className="page-hero page-hero--about">
         <div className="container">
           <span className="eyebrow">About Us</span>
           <h1>Who We Are — Marine Tank Cleaning &amp; Ship Repair, Jebel Ali</h1>
@@ -184,14 +85,14 @@ export default function About() {
                 <li>Business Bay, Dubai</li>
                 <li>Gulf-wide mobilisation</li>
               </ul>
-              <div className="grid grid-3" style={{ marginTop: 40 }}>
+              <div className="grid grid-2" style={{ marginTop: 40 }}>
                 {services.map((s) => (
                   <div className="feature-row" key={s.slug}>
                     <span className="feature-row__icon">
                       <Icon name={s.icon} size={20} />
                     </span>
                     <div>
-                      <h4>{s.title}</h4>
+                      <h3>{s.title}</h3>
                     </div>
                   </div>
                 ))}
@@ -228,7 +129,7 @@ export default function About() {
                 <div className="why-card">
                   <span className="why-card__num">{String(i + 1).padStart(2, '0')}</span>
                   <div>
-                    <h4>{w.title}</h4>
+                    <h3>{w.title}</h3>
                     <p>{w.desc}</p>
                   </div>
                 </div>
@@ -255,7 +156,7 @@ export default function About() {
                     <Icon name="shield" size={22} />
                   </span>
                   <div>
-                    <h4>Compliance First</h4>
+                    <h3>Compliance First</h3>
                     <p>Work carried out to recognised maritime safety standards.</p>
                   </div>
                 </div>
@@ -264,7 +165,7 @@ export default function About() {
                     <Icon name="users" size={22} />
                   </span>
                   <div>
-                    <h4>Experienced Crew</h4>
+                    <h3>Experienced Crew</h3>
                     <p>Marine engineers and technicians with real sea time.</p>
                   </div>
                 </div>
@@ -280,7 +181,7 @@ export default function About() {
                 >
                   <img src={c.logo} alt={`${c.name} certification`} style={{ width: 130 }} loading="lazy" />
                   <div>
-                    <h4>{c.name}</h4>
+                    <h3>{c.name}</h3>
                     <p>{c.desc}</p>
                   </div>
                 </div>

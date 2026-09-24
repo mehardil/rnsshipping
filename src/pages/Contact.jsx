@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import Seo from '../components/Seo'
 import Reveal from '../components/Reveal'
 import { Icon } from '../components/Icons'
 import { company, services, faqs } from '../data/site'
-import { disposeAll, flyIn, gsap, prefersReducedMotion } from '../lib/anim'
 
 const initial = {
   name: '',
@@ -15,52 +14,22 @@ const initial = {
 }
 
 export default function Contact() {
+  const [params] = useSearchParams()
   const [form, setForm] = useState(initial)
+  useEffect(() => {
+    const subject = params.get('service')
+    if (services.some(service => service.title === subject)) setForm(value => ({ ...value, subject }))
+  }, [params])
   const [sent, setSent] = useState(false)
 
-  const update = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
-
-  /* Contact-only scroll flow */
-  useEffect(() => {
-    if (prefersReducedMotion) return
-    const cleanups = []
-    const ctx = gsap.context(() => {
-      /* info cards fly in from the right, form from the left */
-      gsap.utils.toArray('.info-card').forEach((el, i) => {
-        cleanups.push(
-          flyIn(el, { from: 'right', distance: 120, start: 'top 88%', end: 'top 55%', scrub: 1.2 })
-        )
-        cleanups.push(
-          gsap.to(el, { y: -6, duration: 2 + (i % 4) * 0.25, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: i * 0.12 })
-        )
-      })
-
-      cleanups.push(
-        flyIn('.form', { from: 'left', distance: 120, start: 'top 88%', end: 'top 55%', scrub: 1.2 })
-      )
-
-      cleanups.push(
-        gsap.fromTo(
-          '.map-embed',
-          { clipPath: 'inset(0 0 100% 0)' },
-          {
-            clipPath: 'inset(0 0 0% 0)',
-            duration: 1.1,
-            ease: 'power4.out',
-            immediateRender: false,
-            scrollTrigger: { trigger: '.map-embed', start: 'top 85%', once: true },
-          }
-        )
-      )
-    })
-    return () => {
-      disposeAll(cleanups)
-      ctx.revert()
-    }
-  }, [])
+  const update = (e) => { e.target.setCustomValidity(''); setForm((f) => ({ ...f, [e.target.name]: e.target.value })) }
 
   const onSubmit = (e) => {
     e.preventDefault()
+    for (const name of ['name', 'message']) {
+      const field = e.currentTarget.elements.namedItem(name)
+      if (!field.value.trim()) { field.setCustomValidity('Please enter your ' + name + '.'); field.reportValidity(); return }
+    }
     setSent(true)
   }
 
@@ -138,12 +107,12 @@ export default function Contact() {
           <Reveal delay={120}>
             {sent ? (
               <div className="form">
-                <div className="form__success">
+                <div className="form__success" role="status">
                   <Icon name="check" size={26} />
                   <div>
-                    <h3 style={{ marginBottom: 4 }}>Thank you, {form.name || 'there'}!</h3>
+                    <h3 style={{ marginBottom: 4 }}>Your enquiry is ready, {form.name || 'there'}.</h3>
                     <p style={{ margin: 0 }}>
-                      Your enquiry has been received. Our operations team will be in touch shortly.
+                      Your details are ready below. Open your email app, review the draft and press Send to contact our operations team.
                       For urgent matters, call{' '}
                       <a href={`tel:${company.phoneHref}`} style={{ color: 'var(--navy-700)' }}>
                         {company.phone}
@@ -152,26 +121,29 @@ export default function Contact() {
                     </p>
                   </div>
                 </div>
+                <a className="btn btn--primary mt-40" href={`mailto:${company.email}?subject=${encodeURIComponent(form.subject + ' enquiry - ' + form.name)}&body=${encodeURIComponent('Name: ' + form.name + '\nEmail: ' + form.email + '\nPhone: ' + form.phone + '\nService: ' + form.subject + '\n\n' + form.message)}`}>Open email draft <Icon name="arrow" size={18} /></a>
                 <button
                   type="button"
                   className="btn btn--ghost mt-40"
                   onClick={() => {
-                    setForm(initial)
                     setSent(false)
                   }}
                 >
-                  Send another enquiry
+                  Edit enquiry
                 </button>
               </div>
             ) : (
               <form className="form" onSubmit={onSubmit}>
                 <h3>Contact Us Now</h3>
+                <p className="form__intro">Share your vessel name, port and required date. This form prepares an email draft; nothing is sent until you send it from your email app.</p>
                 <div className="form__row">
                   <div className="field">
                     <label htmlFor="name">Your Name *</label>
                     <input
                       id="name"
                       name="name"
+                      autoComplete="name"
+                      maxLength={120}
                       value={form.name}
                       onChange={update}
                       placeholder="Enter your name"
@@ -183,6 +155,8 @@ export default function Contact() {
                     <input
                       id="email"
                       name="email"
+                      autoComplete="email"
+                      maxLength={254}
                       type="email"
                       value={form.email}
                       onChange={update}
@@ -197,6 +171,9 @@ export default function Contact() {
                     <input
                       id="phone"
                       name="phone"
+                      type="tel"
+                      autoComplete="tel"
+                      maxLength={40}
                       value={form.phone}
                       onChange={update}
                       placeholder="United Arab Emirates +971"
@@ -219,6 +196,7 @@ export default function Contact() {
                   <textarea
                     id="message"
                     name="message"
+                    maxLength={3000}
                     value={form.message}
                     onChange={update}
                     placeholder="Vessel name, port, and your requirements…"
@@ -226,7 +204,7 @@ export default function Contact() {
                   />
                 </div>
                 <button type="submit" className="btn btn--primary">
-                  Send Enquiry
+                  Prepare Enquiry
                   <Icon name="arrow" size={18} className="btn__arrow" />
                 </button>
                 <p className="form__note">

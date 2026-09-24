@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from 'react'
 
 export default function Counter({ value, suffix = '', duration = 1600 }) {
   const ref = useRef(null)
-  const [display, setDisplay] = useState(0)
+  const [display, setDisplay] = useState(value)
   const started = useRef(false)
 
   useEffect(() => {
     const el = ref.current
-    if (!el) return
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let frame
     if (typeof IntersectionObserver === 'undefined') {
       setDisplay(value)
       return
@@ -22,20 +23,20 @@ export default function Counter({ value, suffix = '', duration = 1600 }) {
               const p = Math.min((now - start) / duration, 1)
               const eased = 1 - Math.pow(1 - p, 3)
               setDisplay(Math.round(eased * value))
-              if (p < 1) requestAnimationFrame(tick)
+              if (p < 1) frame = requestAnimationFrame(tick)
             }
-            requestAnimationFrame(tick)
+            frame = requestAnimationFrame(tick)
           }
         })
       },
       { threshold: 0.4 }
     )
     io.observe(el)
-    return () => io.disconnect()
+    return () => { io.disconnect(); cancelAnimationFrame(frame); started.current = false }
   }, [value, duration])
 
   return (
-    <b className="block font-head text-[clamp(2rem,4vw,3rem)] font-extrabold leading-none text-accent">
+    <b ref={ref} className="block font-head text-[clamp(2rem,4vw,3rem)] font-extrabold leading-none text-accent">
       {display}
       {suffix}
     </b>

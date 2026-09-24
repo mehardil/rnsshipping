@@ -1,8 +1,6 @@
-import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { company, navLinks, services } from '../data/site'
 import { Icon } from './Icons'
-import { disposeAll, footerTextReveal, prefersReducedMotion } from '../lib/anim'
 
 const socialIcon = {
   LinkedIn: 'linkedin',
@@ -12,12 +10,6 @@ const socialIcon = {
 }
 
 export default function Footer() {
-  useEffect(() => {
-    if (prefersReducedMotion) return
-    const cleanups = [footerTextReveal('.footer__bigtext')]
-    return () => disposeAll(cleanups)
-  }, [])
-
   return (
     <footer className="footer">
       <div className="container">
@@ -51,7 +43,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4>Useful Links</h4>
+            <h2>Useful Links</h2>
             <ul className="footer__links">
               {navLinks.map((l) => (
                 <li key={l.to}>
@@ -62,18 +54,18 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4>Our Services</h4>
+            <h2>Our Services</h2>
             <ul className="footer__links">
               {services.map((s) => (
                 <li key={s.slug}>
-                  <Link to={`/services#${s.slug}`}>{s.title}</Link>
+                  <Link to={`/services/${s.slug}`}>{s.title}</Link>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4>Contact Us</h4>
+            <h2>Contact Us</h2>
             <ul className="footer__contact">
               {company.offices.map((o) => (
                 <li key={o.label}>

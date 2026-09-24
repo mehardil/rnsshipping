@@ -14,10 +14,12 @@ export default function Reveal({
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    if (typeof IntersectionObserver === 'undefined') {
+    if (typeof IntersectionObserver === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setShown(true)
       return
     }
+    if (el.getBoundingClientRect().top < window.innerHeight) { setShown(true); return }
+    el.dataset.revealReady = 'true'
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -27,7 +29,7 @@ export default function Reveal({
           }
         })
       },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0, rootMargin: '0px 0px -16px 0px' }
     )
     io.observe(el)
     return () => io.disconnect()

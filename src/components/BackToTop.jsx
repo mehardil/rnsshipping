@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { getLenis } from '../lib/anim'
 import { Icon } from './Icons'
 
 export default function BackToTop() {
@@ -13,9 +12,7 @@ export default function BackToTop() {
   }, [])
 
   const toTop = () => {
-    const lenis = getLenis()
-    if (lenis) lenis.scrollTo(0, { duration: 1.1 })
-    else window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
   }
 
   return (
