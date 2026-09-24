@@ -4,7 +4,7 @@ import Seo from '../components/Seo'
 import Reveal from '../components/Reveal'
 import { Icon } from '../components/Icons'
 import { services, faqs } from '../data/site'
-import { animateSplitHeading, disposeAll, gsap, mm, prefersReducedMotion } from '../lib/anim'
+import { animateSplitHeading, disposeAll, gsap, mm, prefersReducedMotion, ScrollTrigger } from '../lib/anim'
 
 export default function Services() {
   const { hash } = useLocation()
@@ -142,7 +142,7 @@ export default function Services() {
         }}
       />
 
-      <section className="page-hero">
+      <section className="page-hero page-hero--media">
         <div className="container">
           <span className="eyebrow">Our Services</span>
           <h1>Comprehensive Marine Services &amp; Solutions</h1>

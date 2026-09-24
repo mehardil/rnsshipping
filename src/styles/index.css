@@ -407,11 +407,6 @@
   color: #fff;
   background: radial-gradient(120% 120% at 80% 10%, #262760 0%, #14163a 55%, #0c0d24 100%);
 }
-.hero__canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
 .hero__photo {
   position: absolute;
   inset: 0;
@@ -954,6 +949,36 @@
   padding: 156px 0 84px;
   color: #fff;
   background: radial-gradient(110% 130% at 85% 0%, #33357a 0%, #1a1c42 50%, #0c0d24 100%);
+}
+/* Optional animated/media background (e.g. Services hero). Falls back to the
+   ship still if the gif has not been added yet. */
+.page-hero--media {
+  overflow: hidden;
+}
+.page-hero--media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.42;
+  background: #0c0d24 url('/images/hero.gif') center/cover no-repeat;
+  background-image: url('/images/hero.gif'), url('/images/rns-ship-hero.webp');
+}
+.page-hero--media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(12, 13, 36, 0.94) 0%,
+    rgba(20, 22, 58, 0.78) 45%,
+    rgba(20, 22, 58, 0.25) 100%
+  );
+}
+.page-hero--media > .container {
+  position: relative;
+  z-index: 1;
 }
 .page-hero h1 {
   color: #fff;
@@ -1869,7 +1894,13 @@
     gap: 44px;
   }
   .showcase__visual {
-    min-height: 300px;
+    min-height: 320px;
+  }
+  .showcase__ring {
+    width: min(128%, 460px);
+  }
+  .showcase__ship {
+    width: min(100%, 440px);
   }
   .showcase__word {
     font-size: clamp(3rem, 20vw, 7rem);
