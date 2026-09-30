@@ -123,7 +123,11 @@ export default function About() {
         }}
       />
 
-      <section className="page-hero">
+      <section className="page-hero page-hero--media">
+        <div className="page-hero__bg" aria-hidden="true">
+          <img src="/images/about.webp" alt="" fetchPriority="high" decoding="async" />
+        </div>
+        <div className="page-hero__overlay" />
         <div className="container">
           <span className="eyebrow">About Us</span>
           <h1>Who We Are — Marine Tank Cleaning &amp; Ship Repair, Jebel Ali</h1>

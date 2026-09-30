@@ -31,10 +31,10 @@ export default function Preloader({ onDone }) {
     tl.fromTo(
       rootRef.current.querySelector('.pl__logo'),
       { opacity: 0, y: 26, scale: 0.85 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'power3.out' }
+      { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power3.out' }
     ).to(progress, {
       value: 100,
-      duration: 1.15,
+      duration: 0.75,
       ease: 'power2.inOut',
       onUpdate: () => {
         if (labelRef.current) {
@@ -48,18 +48,18 @@ export default function Preloader({ onDone }) {
 
     tl.to(rootRef.current.querySelector('.pl__panel-top'), {
       yPercent: -100,
-      duration: 0.9,
+      duration: 0.65,
       ease: 'power4.inOut',
     })
     tl.to(
       rootRef.current.querySelector('.pl__panel-bottom'),
-      { yPercent: 100, duration: 0.9, ease: 'power4.inOut' },
-      '<0.12'
+      { yPercent: 100, duration: 0.65, ease: 'power4.inOut' },
+      '<0.1'
     )
     tl.to(
       rootRef.current.querySelector('.pl__center'),
-      { opacity: 0, y: -30, duration: 0.4, ease: 'power2.in' },
-      '-=0.95'
+      { opacity: 0, y: -30, duration: 0.3, ease: 'power2.in' },
+      '-=0.7'
     )
     tl.add(() => {
       sessionStorage.setItem(SESSION_KEY, '1')

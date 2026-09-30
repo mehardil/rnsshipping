@@ -1,14 +1,15 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
 import Reveal from '../components/Reveal'
 import Counter from '../components/Counter'
-import Testimonials from '../components/Testimonials'
 import ClientMarquee from '../components/ClientMarquee'
 import MarqueeBand from '../components/MarqueeBand'
 import ShipShowcase from '../components/ShipShowcase'
 import { Icon } from '../components/Icons'
 import { services, stats, whyChoose, company, clients } from '../data/site'
+
+const Testimonials = lazy(() => import('../components/Testimonials'))
 import {
   ScrollTrigger,
   animateSplitHeading,
@@ -30,7 +31,7 @@ export default function Home() {
   /* Home-only scroll flow */
   useEffect(() => {
     if (prefersReducedMotion) return
-    const delays = wasPreloaded() ? 0.15 : 2.55
+    const delays = wasPreloaded() ? 0.15 : 1.5
 
     const cleanups = []
     const html = document.documentElement
@@ -279,7 +280,7 @@ export default function Home() {
       {/* ---------------- HERO ---------------- */}
       <section className="hero">
         <div className="hero__photo" aria-hidden="true">
-          <img src="/images/rns-ship-hero.webp" alt="" />
+          <img src="/images/rns-ship-hero.webp" alt="" fetchPriority="high" decoding="async" />
         </div>
         <div className="hero__overlay" />
         <div className="container">
@@ -337,7 +338,7 @@ export default function Home() {
             <Reveal className="media-stack">
               <div className="media-stack__main">
                 <img
-                  src="/images/ship-technical.png"
+                  src="/images/ship-technical.webp"
                   alt="RNS Shipping engineers carrying out technical servicing aboard a vessel"
                   loading="lazy"
                 />
@@ -506,7 +507,9 @@ export default function Home() {
               excellence and service reliability.
             </p>
           </Reveal>
-          <Testimonials />
+          <Suspense fallback={<div style={{ minHeight: 340 }} />}>
+            <Testimonials />
+          </Suspense>
         </div>
       </section>
 

@@ -76,7 +76,12 @@ export default function Layout() {
   /* Entrance once the preloader curtain lifts. */
   useLayoutEffect(() => {
     if (!ready || prefersReducedMotion) return
-    gsap.from('.nav', { yPercent: -100, duration: 0.8, ease: 'power3.out' })
+    gsap.from('.nav', {
+      yPercent: -100,
+      duration: 0.8,
+      ease: 'power3.out',
+      clearProps: 'transform',
+    })
     gsap.from('.topbar', { opacity: 0, duration: 0.5, delay: 0.15 })
   }, [ready, pathname])
 
