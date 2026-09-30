@@ -1,8 +1,11 @@
+import { MotionContext } from './MotionContext'
 import { useEffect, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import BackToTop from './BackToTop'
+import { Icon } from './Icons'
+import { company } from '../data/site'
 
 export default function Layout() {
   const { pathname, hash } = useLocation()
@@ -28,10 +31,26 @@ export default function Layout() {
     if (paused) return
     let active = true
     let media
+    let loading = false
+    let refreshTriggers = () => {}
+    let refreshFrame
+    const desktop = window.matchMedia('(min-width: 961px) and (prefers-reduced-motion: no-preference)')
+    const refresh = () => {
+      cancelAnimationFrame(refreshFrame)
+      refreshFrame = requestAnimationFrame(() => { if (active) refreshTriggers() })
+    }
+    const sizeObserver = new ResizeObserver(refresh)
+    sizeObserver.observe(document.querySelector('main'))
+    document.fonts?.ready.then(refresh)
+    document.addEventListener('load', refresh, true)
     const startMotion = async () => {
-      if (!window.matchMedia('(min-width: 961px) and (prefers-reduced-motion: no-preference)').matches) return
-      const { gsap } = await import('../lib/anim')
-      if (!active) return
+      if (!active || loading || media || !desktop.matches) return
+      loading = true
+      // Reload/navigation can interrupt this optional module download.
+      const animation = await import('../lib/anim').catch(() => null)
+      if (!active || !animation) { loading = false; return }
+      const { gsap, ScrollTrigger } = animation
+      refreshTriggers = () => ScrollTrigger.refresh()
       media = gsap.matchMedia()
       media.add('(min-width: 961px) and (prefers-reduced-motion: no-preference)', () => {
         const context = gsap.context(() => {
@@ -44,19 +63,35 @@ export default function Layout() {
         })
         return () => context.revert()
       })
+      refresh()
     }
     // Load the desktop parallax engine only when someone starts scrolling.
     if (window.scrollY > 0) startMotion()
-    else window.addEventListener('scroll', startMotion, { once: true, passive: true })
-    return () => { active = false; window.removeEventListener('scroll', startMotion); media?.revert(); videos.forEach(video => video.pause()) }
+    window.addEventListener('scroll', startMotion, { passive: true })
+    desktop.addEventListener('change', startMotion)
+    window.addEventListener('pageshow', refresh)
+    return () => {
+      active = false
+      window.removeEventListener('scroll', startMotion)
+      desktop.removeEventListener('change', startMotion)
+      window.removeEventListener('pageshow', refresh)
+      document.removeEventListener('load', refresh, true)
+      sizeObserver.disconnect()
+      cancelAnimationFrame(refreshFrame)
+      media?.revert()
+      videos.forEach(video => video.pause())
+    }
 
   }, [pathname, paused])
-  return <>
+  return <MotionContext.Provider value={!paused}>
     <a href="#main-content" className="skip-link">Skip to content</a>
     <Navbar />
     <main id="main-content" tabIndex={-1}><Outlet /></main>
     <div className="motion-bar" role="region" aria-label="Display preferences"><div className="container"><span>RNS Shipping · Marine Services, UAE</span><button type="button" onClick={() => setPaused(value => !value)} aria-pressed={paused}>{paused ? 'Resume motion' : 'Pause motion'}</button></div></div>
     <Footer />
+    <a className="floating-call" href={`tel:${company.phoneHref}`} aria-label={`Call RNS Shipping on ${company.phone}`} title={`Call ${company.phone}`}>
+      <Icon name="phone" size={25} />
+    </a>
     <BackToTop />
-  </>
+  </MotionContext.Provider>
 }

@@ -1,3 +1,4 @@
+import ServiceOrbit from '../components/ServiceOrbit'
 import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
 import Reveal from '../components/Reveal'
@@ -20,7 +21,7 @@ export default function Home() {
         description="Professional ship tank cleaning service in Jebel Ali, Dubai & Khorfakkan. RNS Shipping delivers expert marine tank cleaning, ship repair, chandelling and spare parts logistics across the UAE."
         path="/"
         keywords="ship repair in UAE, ship repair Dubai, marine tank cleaning Jebel Ali, vessel tank cleaning Khorfakkan, ship chandelling Dubai, marine engineering Jebel Ali"
-        image="/images/ship-technical-optimized.webp"
+        image="/images/marine-engine-room.webp"
       />
 
       {/* ---------------- HERO ---------------- */}
@@ -84,13 +85,13 @@ export default function Home() {
             <Reveal className="media-stack">
               <div className="media-stack__main">
                 <img
-                  src="/images/ship-technical.webp"
-                  alt="RNS Shipping engineers carrying out technical servicing aboard a vessel"
+                  src="/images/marine-engine-room.webp"
+                  alt="Pipework and mechanical systems inside a ship engine room"
                   loading="lazy"
                 />
               </div>
               <div className="media-stack__inset">
-                <img src="/images/technical-gear-optimized.webp" alt="Marine mechanical components and precision gear assembly" loading="lazy" />
+                <img src="/images/marine-control-room.webp" alt="Ship engine control room with monitoring panels and electrical controls" loading="lazy" />
               </div>
               <div className="media-stack__badge">
                 <b>{company.experience}+</b>
@@ -144,43 +145,10 @@ export default function Home() {
       {/* ---------------- SHIP SHOWCASE ---------------- */}
       <ShipShowcase />
 
-      {/* ---------------- SERVICES ---------------- */}
-      <section className="section section--tint">
-        <div className="container">
-          <Reveal className="section-head center">
-            <span className="eyebrow eyebrow--center">What We Offer</span>
-            <h2>Comprehensive Marine Services &amp; Solutions</h2>
-            <p className="lead">
-              Precision. Performance. Reliability. From technical servicing to automation, we keep
-              vessels operating at peak performance.
-            </p>
-          </Reveal>
-          <div className="grid grid-4">
-            {services.map((s, i) => (
-              <Reveal key={s.slug} delay={(i % 4) * 80}>
-                <article className="service-card">
-                  <div className="service-card__media">
-                    <img src={s.image} alt={s.title} loading="lazy" />
-                    <span className="service-card__icon">
-                      <Icon name={s.icon} size={26} />
-                    </span>
-                  </div>
-                  <div className="service-card__body">
-                    <h3>{s.title}</h3>
-                    <p>{s.short}</p>
-                    <Link to={`/services/${s.slug}`} className="service-card__link">
-                      View Details <Icon name="arrow" size={16} />
-                    </Link>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServiceOrbit />
 
       {/* ---------------- COUNTERS ---------------- */}
-      <section className="section section--dark">
+      <section className="section stats-band">
         <div className="container">
           <Reveal>
             <div className="counters">
@@ -255,8 +223,8 @@ export default function Home() {
               excellence and service reliability.
             </p>
           </Reveal>
-          <Testimonials />
         </div>
+        <Testimonials />
       </section>
 
       {/* ---------------- CTA ---------------- */}

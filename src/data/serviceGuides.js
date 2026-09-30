@@ -2,7 +2,8 @@ export const serviceGuides = {
   'technical-services': {
     heading: 'Ship Repair & Technical Services in the UAE',
     description: 'Ship repair, tank cleaning, engine maintenance and marine technical servicing in Dubai, Jebel Ali and Khorfakkan. Discuss your vessel requirements with RNS Shipping.',
-    image: '/images/ship-technical-optimized.webp',
+    image: '/images/marine-engine-room.webp',
+    heroImage: '/images/marine-engine-room-hero.webp',
     alt: 'Marine technical equipment and vessel maintenance',
     overview: 'A maintenance requirement rarely sits in isolation. The vessel\u2019s operating schedule, access arrangements and condition of the equipment all shape the work. RNS Shipping brings ship repair, tank cleaning and technical servicing together so ship owners and managers can discuss a complete requirement with one operations team.',
     sections: [
@@ -21,6 +22,7 @@ export const serviceGuides = {
     heading: 'Ship Chandelling & Marine Supplies in Dubai',
     description: 'Provisions, deck and engine stores, safety equipment and marine supplies for vessel calls in Dubai and the UAE. Request ship chandelling from RNS Shipping.',
     image: '/images/rns-containers.webp',
+    heroImage: '/images/rns-ship-hero.webp',
     alt: 'Cargo containers used in maritime supply operations',
     overview: 'Reliable vessel supply starts with a clear requisition. RNS Shipping provides ship chandelling across provisions, cabin and galley stores, safety equipment, deck and engine stores, and specialist onboard supplies. A consolidated enquiry helps the operations team review quantities, specifications and delivery timing together.',
     sections: [
@@ -39,6 +41,7 @@ export const serviceGuides = {
     heading: 'Ship Spare Parts & Marine Logistics',
     description: 'Marine spare parts logistics by air, sea and land, including Caterpillar and Yanmar spares, handling and clearance support. Contact RNS Shipping in Dubai.',
     image: '/images/rns-logistics.webp',
+    heroImage: '/images/rns-ship-dramatic.webp',
     alt: 'Freight handling and transport for marine logistics',
     overview: 'The right spare part has to reach the right vessel at the right time. RNS Shipping coordinates marine spare parts and equipment through air, sea and land transport, with handling, project logistics and clearance support. Accurate part identification and a realistic delivery window help shape the right route for the shipment.',
     sections: [
@@ -56,7 +59,8 @@ export const serviceGuides = {
   automation: {
     heading: 'Marine Automation & Vessel Control Systems',
     description: 'Marine automation, engine and boiler controls, cargo pump systems and vessel monitoring support in Dubai and the UAE. Discuss your system with RNS Shipping.',
-    image: '/images/technical-gear-optimized.webp',
+    image: '/images/marine-control-room.webp',
+    heroImage: '/images/marine-control-room-hero.webp',
     alt: 'Technical machinery and equipment for marine operations',
     overview: 'Reliable automation depends on understanding how a vessel\u2019s systems work together. RNS Shipping provides installation, maintenance and troubleshooting for marine automation and control systems. A focused technical enquiry helps the team review the affected equipment, observed behaviour and the vessel\u2019s operating requirements.',
     sections: [

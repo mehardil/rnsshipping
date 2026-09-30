@@ -40,7 +40,7 @@ export default function Seo({
   title,
   description,
   path = '/',
-  image = '/images/ship-technical-optimized.webp',
+  image = '/images/marine-engine-room.webp',
   keywords,
   jsonLd,
   noindex = false,

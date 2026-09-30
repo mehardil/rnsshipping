@@ -14,7 +14,7 @@ export default function ServiceDetail() {
   return <>
     <Seo title={guide.heading} description={guide.description} path={`/services/${slug}`} image={guide.image} jsonLd={{ '@context': 'https://schema.org', '@type': 'Service', name: service.title, description: service.intro, serviceType: service.title, areaServed: { '@type': 'Country', name: 'United Arab Emirates' }, provider: { '@id': 'https://rnsshipping.com/#organization' }, url: `https://rnsshipping.com/services/${slug}` }} />
     <section className="page-hero service-hero">
-      <img className="page-hero__photo" src={guide.image} alt="" width="1400" height="900" fetchpriority="high" />
+      <img className="page-hero__photo" src={guide.heroImage || guide.image} alt="" width="1400" height="900" fetchpriority="high" />
       <div className="page-hero__overlay" />
       <div className="container"><nav className="breadcrumb" aria-label="Breadcrumb"><Link to="/">Home</Link><span>/</span><Link to="/services">Services</Link><span>/</span><span aria-current="page">{service.title}</span></nav><h1>{guide.heading}</h1><p className="lead">{service.intro}</p><Link to={`/contact?service=${encodeURIComponent(service.title)}`} className="btn btn--accent">Discuss your requirement <Icon name="arrow" size={18} /></Link></div>
     </section>

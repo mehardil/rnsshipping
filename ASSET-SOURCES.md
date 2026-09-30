@@ -21,3 +21,18 @@ Other images and videos were supplied in the existing project and have been reta
 ## Delivery optimizations and fonts
 - `ship-technical-optimized.webp` and `technical-gear-optimized.webp` are compressed copies of the supplied images. Originals are retained.
 - Montserrat and Roboto are the original site typefaces, now self-hosted from Google Fonts to remove external render-blocking requests. Their SIL Open Font Licenses are included in `public/fonts/`.
+
+## Replacement marine engineering photography
+- `public/images/marine-engine-room.webp`: iSawRed, "Various pipes on the engine room."
+  - Source: https://unsplash.com/photos/a-large-machine-with-pipes-WB9HyqF8lKA
+  - Delivered as a 1400px-wide WebP by the image provider.
+- `public/images/marine-control-room.webp`: Dmitrijs Safrans, ship engine control room.
+  - Source: https://unsplash.com/photos/a-control-room-filled-with-lots-of-electronic-equipment-2CakbXfm_gM
+  - Delivered as a 1100px-wide WebP by the image provider.
+- Both source pages identify these photos as free under https://unsplash.com/license.
+- Downloaded 2026-09-30. Used as illustrative maritime photography, not identified as RNS personnel, vessels or facilities.
+- Replaces the previously supplied technician/gear imagery in visible sections, service data and social previews; old files are retained.
+
+## Hero clarity update
+- Added 2400px versions of the same credited engineering photos as `marine-engine-room-hero.webp` and `marine-control-room-hero.webp`; obtained from the image provider at quality 88 for full-width heroes.
+- Chandelling and logistics guide heroes use the existing 1920px `rns-ship-hero.webp` and `rns-ship-dramatic.webp` instead of enlarging small card images. Card imagery is retained.

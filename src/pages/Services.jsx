@@ -12,7 +12,7 @@ export default function Services() {
         description="RNS Shipping services: technical servicing and ship repair, ship chandelling, ship spare parts logistics, and marine automation across Dubai, Jebel Ali and Khorfakkan, UAE."
         path="/services"
         keywords="ship repair services Dubai, marine engineering Jebel Ali, ship chandelling Dubai, ship spare parts logistics UAE, marine automation Dubai"
-        image="/images/ship-technical-optimized.webp"
+        image="/images/marine-engine-room.webp"
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'ItemList',
@@ -97,13 +97,13 @@ export default function Services() {
             <Reveal className="media-stack">
               <div className="media-stack__main">
                 <img
-                  src="/images/ship-technical.webp"
-                  alt="RNS Shipping engineers carrying out technical servicing aboard a vessel"
+                  src="/images/marine-engine-room.webp"
+                  alt="Pipework and mechanical systems inside a ship engine room"
                   loading="lazy"
                 />
               </div>
               <div className="media-stack__inset">
-                <img src="/images/technical-gear-optimized.webp" alt="Marine mechanical components and precision gear assembly" loading="lazy" />
+                <img src="/images/marine-control-room.webp" alt="Ship engine control room with monitoring panels and electrical controls" loading="lazy" />
               </div>
               <div className="media-stack__badge">
                 <b>24/7</b>

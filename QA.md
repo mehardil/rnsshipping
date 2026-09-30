@@ -20,3 +20,6 @@ The site is built locally, not deployed. The static host must serve each generat
 
 ## Evidence
 Machine-readable reports and screenshots are in `artifacts/` (gitignored). Asset credits and font licenses are documented in ASSET-SOURCES.md and public/fonts/.
+
+## Motion lifecycle regression checks
+Production preview passes `node tests/motion-lifecycle.cjs` in Chrome, Firefox and WebKit (set `BROWSER=firefox` or `BROWSER=webkit`). Checks cover repeat reveals and counters, mobile-to-desktop parallax initialization, carousel leave/return and hover/pause recovery, route/history revisits, reduced motion, and uncaught page errors. `tests/service-scroll.cjs` also passes against preview for laptop/tablet scrolling and panel visibility. These checks are separate from the earlier Lighthouse measurements.
