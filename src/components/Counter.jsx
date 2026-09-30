@@ -29,7 +29,7 @@ export default function Counter({ value, suffix = '', duration = 1600 }) {
           }
         })
       },
-      { threshold: 0.4 }
+      { threshold: 0.1 }
     )
     io.observe(el)
     return () => { io.disconnect(); cancelAnimationFrame(frame); started.current = false }

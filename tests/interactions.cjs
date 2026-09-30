@@ -34,8 +34,8 @@ const routes = ['/', '/about', '/services', '/contact', '/services/technical-ser
     await page.getByRole('button',{name:'Edit enquiry'}).click();assert.equal(await page.locator('#name').inputValue(),'Test & Review');
     await page.goto(base+'/services');await page.locator('.service-index a').last().click();await page.waitForFunction(()=>Math.abs(document.querySelector('#automation').getBoundingClientRect().top)<200);assert.ok(await page.locator('#automation').evaluate(el=>Math.abs(el.getBoundingClientRect().top)<200));
     await page.setViewportSize({width:844,height:390});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
-    await page.goto(base);await page.getByRole('button',{name:'Pause motion',exact:true}).click();assert.equal(await page.locator('html').getAttribute('data-motion'),'paused');
-    await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await page.waitForTimeout(300);assert.equal(await page.locator('html').getAttribute('data-motion'),'paused');
+    await page.goto(base);await page.getByRole('button',{name:'Pause motion',exact:true}).click();await page.waitForFunction(()=>document.documentElement.dataset.motion==='paused');assert.equal(await page.locator('html').getAttribute('data-motion'),'paused');
+    await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await page.waitForFunction(()=>document.documentElement.dataset.motion==='paused');assert.equal(await page.locator('html').getAttribute('data-motion'),'paused');
     assert.deepEqual([...new Set(errors)],[],name+' JavaScript errors');
     await browser.close();console.log(name+': 24 route/width checks + menu, form, anchors, landscape and reduced-motion passed');
   }

@@ -49,7 +49,21 @@ export default function Contact() {
         }}
       />
 
-      <section className="page-hero">
+      <section className="page-hero page-hero--media">
+        <div className="page-hero__bg" aria-hidden="true">
+          <video
+            className="page-hero__bg-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/images/contact-poster.jpg"
+          >
+            <source src="/images/contact_video.mp4" media="(min-width: 768px)" type="video/mp4" />
+          </video>
+        </div>
+        <div className="page-hero__overlay" />
         <div className="container">
           <span className="eyebrow">Contact Us</span>
           <h1>We’d Love to Hear From You</h1>

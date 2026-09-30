@@ -84,7 +84,7 @@ export default function Home() {
             <Reveal className="media-stack">
               <div className="media-stack__main">
                 <img
-                  src="/images/ship-technical-optimized.webp"
+                  src="/images/ship-technical.webp"
                   alt="RNS Shipping engineers carrying out technical servicing aboard a vessel"
                   loading="lazy"
                 />

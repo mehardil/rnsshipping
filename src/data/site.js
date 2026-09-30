@@ -131,7 +131,7 @@ export const stats = [
   { value: 35, suffix: '+', label: 'Years of Experience' },
   { value: 500, suffix: '+', label: 'Vessels Supported' },
   { value: 24, suffix: '/7', label: 'Operational Support' },
-  { value: 100, suffix: '%', label: 'Commitment to Quality' },
+  { value: 99, suffix: '%', label: 'Commitment to Quality' },
 ]
 
 export const testimonials = [

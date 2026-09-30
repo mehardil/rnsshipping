@@ -102,6 +102,9 @@
 
 .section {
   padding: 92px 0;
+  /* Clip horizontal overflow from entrance transforms (fly-in cards etc.)
+     without creating a scroll container, so sticky keeps working. */
+  overflow-x: clip;
 }
 .section--tint {
   background: var(--tint);
@@ -304,7 +307,7 @@
 .nav {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 70;
   background: rgba(255, 255, 255, 0.98);
   border-bottom: 1px solid var(--line);
   transition: box-shadow 0.3s ease;
@@ -984,6 +987,55 @@
   z-index: 2;
   width: 100%;
 }
+/* Static image hero background with a slow Ken Burns drift + soft blur. */
+.page-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.page-hero__bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 13, 36, 0.5) 0%,
+    rgba(12, 13, 36, 0) 30%,
+    rgba(12, 13, 36, 0) 68%,
+    rgba(12, 13, 36, 0.72) 100%
+  );
+}
+.page-hero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  transform: scale(1.12);
+  filter: blur(2px) saturate(1.06) brightness(0.92);
+  transform-origin: 50% 45%;
+  animation: hero-ken-burns 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.page-hero__bg-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  transform: scale(1.06);
+  filter: blur(2px) saturate(1.08) brightness(0.85);
+  transform-origin: 50% 50%;
+}
+@keyframes hero-ken-burns {
+  from {
+    transform: scale(1.12) translate3d(-1%, 0, 0);
+  }
+  to {
+    transform: scale(1.24) translate3d(1.5%, -1.5%, 0);
+  }
+}
 .page-hero h1 {
   color: #fff;
   margin-bottom: 18px;
@@ -1315,13 +1367,17 @@
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 60;
+    z-index: 80;
     flex-direction: column;
     align-items: flex-start;
     gap: 22px;
     width: min(320px, 86vw);
     height: 100vh;
+    height: 100dvh;
     padding: 96px 28px 40px;
+    padding-top: calc(96px + env(safe-area-inset-top));
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: #fff;
     box-shadow: -24px 0 60px -34px rgba(0, 0, 0, 0.55);
     transform: translateX(105%);
@@ -1351,6 +1407,11 @@
   }
   .nav__cta {
     width: 100%;
+  }
+  /* A transform on the header would break position:fixed for the off-canvas
+     menu and widen the page. Keep the header pinned on small screens. */
+  .nav--hidden {
+    transform: none;
   }
 }
 

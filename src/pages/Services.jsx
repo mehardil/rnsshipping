@@ -33,10 +33,10 @@ export default function Services() {
           loop
           playsInline
           preload="none"
-          poster="/images/hero-poster.jpg"
+          poster="/images/hero-poster.webp"
           aria-hidden="true"
         >
-          <source src="/videos/drydock.mp4" type="video/mp4" />
+          <source src="/videos/drydock.mp4" media="(min-width: 768px)" type="video/mp4" />
         </video>
         <div className="page-hero__overlay" />
         <div className="container">
@@ -97,7 +97,7 @@ export default function Services() {
             <Reveal className="media-stack">
               <div className="media-stack__main">
                 <img
-                  src="/images/ship-technical-optimized.webp"
+                  src="/images/ship-technical.webp"
                   alt="RNS Shipping engineers carrying out technical servicing aboard a vessel"
                   loading="lazy"
                 />
