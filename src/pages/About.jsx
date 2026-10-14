@@ -3,6 +3,7 @@ import Seo from '../components/Seo'
 import Reveal from '../components/Reveal'
 import Counter from '../components/Counter'
 import ClientMarquee from '../components/ClientMarquee'
+import Regions from '../components/Regions'
 import { Icon } from '../components/Icons'
 import { company, stats, whyChoose, certifications, services } from '../data/site'
 
@@ -194,6 +195,8 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      <Regions />
 
       <section className="section">
         <div className="container">

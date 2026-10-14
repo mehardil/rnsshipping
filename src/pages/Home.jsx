@@ -8,6 +8,7 @@ import ClientMarquee from '../components/ClientMarquee'
 import MarqueeBand from '../components/MarqueeBand'
 import ShipShowcase from '../components/ShipShowcase'
 import PortSupport from '../components/PortSupport'
+import Regions from '../components/Regions'
 import { Icon } from '../components/Icons'
 import { services, stats, whyChoose, company, clients } from '../data/site'
 
@@ -49,6 +50,9 @@ export default function Home() {
                 Request a Quote
                 <Icon name="arrow" size={18} className="btn__arrow" />
               </Link>
+              <a href={company.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn--whatsapp">
+                <Icon name="whatsapp" size={19} /> WhatsApp Us
+              </a>
               <Link to="/services" className="btn btn--ghost-light">
                 Explore Services
               </Link>
@@ -56,6 +60,22 @@ export default function Home() {
           </div>
         </div>
         <a href="#marine-services" className="hero__hint">Explore our expertise <Icon name="arrow" size={16} /></a>
+      </section>
+
+      {/* ---------------- COUNTERS ---------------- */}
+      <section className="section stats-band">
+        <div className="container">
+          <Reveal>
+            <div className="counters">
+              {stats.map((s) => (
+                <div className="counter" key={s.label}>
+                  <Counter value={s.value} suffix={s.suffix} />
+                  <span>{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* ---------------- HERO CARDS ---------------- */}
@@ -147,22 +167,6 @@ export default function Home() {
 
       <ServiceOrbit />
 
-      {/* ---------------- COUNTERS ---------------- */}
-      <section className="section stats-band">
-        <div className="container">
-          <Reveal>
-            <div className="counters">
-              {stats.map((s) => (
-                <div className="counter" key={s.label}>
-                  <Counter value={s.value} suffix={s.suffix} />
-                  <span>{s.label}</span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
       {/* ---------------- MARQUEE BAND ---------------- */}
       <MarqueeBand items={services.map((s) => s.title)} />
 
@@ -194,6 +198,8 @@ export default function Home() {
       </section>
 
       <PortSupport />
+
+      <Regions />
 
       {/* ---------------- CLIENTS ---------------- */}
       <section className="section section--tint">

@@ -77,6 +77,10 @@ export default function Navbar() {
               <Icon name="phone" size={15} />
               <a href={`tel:${company.phoneHref}`}>{company.phone}</a>
             </span>
+            <span className="topbar__item">
+              <Icon name="whatsapp" size={15} />
+              <a href={company.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            </span>
             <span className="topbar__item topbar__hide">
               <Icon name="mail" size={15} />
               <a href={`mailto:${company.email}`}>{company.email}</a>

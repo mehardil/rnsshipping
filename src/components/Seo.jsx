@@ -77,7 +77,7 @@ export default function Seo({
         name: 'RNS Shipping LLC',
         url: ORIGIN,
         logo: `${ORIGIN}/images/logo.png`,
-        email: 'info@rnsshipping.com',
+        email: 'info@rns-shipping.com',
         telephone: '+971 55 539 6858',
         address: {
           '@type': 'PostalAddress',
@@ -116,6 +116,6 @@ export function renderHead({ title, description, path = '/', image = '/images/rn
     meta('description', description) + meta('robots', noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large') +
     meta('og:title', fullTitle, 'property') + meta('og:description', description, 'property') + meta('og:url', url, 'property') + meta('og:type','website','property') + meta('og:site_name',SITE,'property') + meta('og:image',ORIGIN + image,'property') +
     meta('twitter:card','summary_large_image') + meta('twitter:title',fullTitle) + meta('twitter:description',description) + meta('twitter:image',ORIGIN+image) +
-    ld('ld-organization', { '@context':'https://schema.org','@type':'Organization','@id':ORIGIN+'/#organization',name:'RNS Shipping LLC',url:ORIGIN,logo:ORIGIN+'/images/logo.png',email:'info@rnsshipping.com',telephone:'+971 55 539 6858',address:{'@type':'PostalAddress',streetAddress:'2209, Damac XL Tower, Business Bay',addressLocality:'Dubai',addressCountry:'AE'} }) +
+    ld('ld-organization', { '@context':'https://schema.org','@type':'Organization','@id':ORIGIN+'/#organization',name:'RNS Shipping LLC',url:ORIGIN,logo:ORIGIN+'/images/logo.png',email:'info@rns-shipping.com',telephone:'+971 55 539 6858',address:{'@type':'PostalAddress',streetAddress:'2209, Damac XL Tower, Business Bay',addressLocality:'Dubai',addressCountry:'AE'},department:[{'@type':'Place',name:'RNS Shipping Head Office',address:{'@type':'PostalAddress',streetAddress:'2209, Damac XL Tower, Business Bay',addressLocality:'Dubai',addressCountry:'AE'}},{'@type':'Place',name:'RNS Shipping Warehouse',address:{'@type':'PostalAddress',streetAddress:'Warehouse - Umm Hurair 2, Office 13, DMC W-341, Dubai Maritime City',addressLocality:'Dubai',addressCountry:'AE'},geo:{'@type':'GeoCoordinates',latitude:25.2433831,longitude:55.3104438},hasMap:'https://www.google.com/maps/search/?api=1&query=RNS+SHIPPING&query_place_id=ChIJ1_yucPVDXz4RcLjmV38H98o'}] }) +
     (jsonLd ? ld('ld-page',jsonLd) : '') + (path !== '/' && !noindex ? ld('ld-breadcrumb',breadcrumbs(path,title)) : '')
 }

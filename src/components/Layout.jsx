@@ -92,6 +92,9 @@ export default function Layout() {
     <a className="floating-call" href={`tel:${company.phoneHref}`} aria-label={`Call RNS Shipping on ${company.phone}`} title={`Call ${company.phone}`}>
       <Icon name="phone" size={25} />
     </a>
+    <a className="floating-whatsapp" href={company.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Chat with RNS Shipping on WhatsApp" title="Chat on WhatsApp">
+      <Icon name="whatsapp" size={27} />
+    </a>
     <BackToTop />
   </MotionContext.Provider>
 }

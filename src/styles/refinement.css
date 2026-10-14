@@ -38,11 +38,11 @@ h2 { font-size: clamp(1.8rem, 3.05vw, 2.8rem); letter-spacing: -.035em; }
 .nav:focus-within { transform: none; }
 .nav__toggle { width: 44px; height: 44px; align-items: center; justify-content: center; flex: none; }
 .hero { min-height: min(790px, calc(100svh - 120px)); padding: 92px 0 120px; background: var(--navy-950); }
-.hero__photo img { height: 100%; opacity: .84; object-position: center 55%; }
-.hero__overlay { background: linear-gradient(90deg,rgba(20,22,58,.93) 0%,rgba(20,22,58,.72) 45%,rgba(20,22,58,.15) 100%); }
+.hero__photo img { height: 100%; opacity: 1; object-position: center 58%; filter: brightness(1.1) saturate(1.14) contrast(1.03); }
+.hero__overlay { background: linear-gradient(100deg,rgba(14,16,44,.82) 0%,rgba(18,20,54,.5) 42%,rgba(18,20,54,.06) 100%), linear-gradient(0deg,rgba(8,10,26,.55) 0%,rgba(8,10,26,0) 42%); }
 .hero__inner { max-width: 850px; }
-.hero__title { font-size: clamp(2.65rem,5.8vw,5.5rem); max-width: 850px; line-height: 1.07; letter-spacing: -.04em; margin: 28px 0 24px; }
-.hero__inner .lead { max-width: 640px; font-size: 1.06rem; line-height: 1.8; }
+.hero__title { font-size: clamp(2.65rem,5.8vw,5.5rem); max-width: 850px; line-height: 1.07; letter-spacing: -.04em; margin: 28px 0 24px; text-shadow: 0 2px 26px rgba(6,8,24,.6); }
+.hero__inner .lead { max-width: 640px; font-size: 1.06rem; line-height: 1.8; text-shadow: 0 1px 16px rgba(6,8,24,.65); }
 .hero__badge { padding: 0; border: 0; border-radius: 0; background: transparent; font-size: .67rem; letter-spacing: .15em; }
 .hero__badge .dot { box-shadow: none; width: 6px; height: 6px; }
 .hero__hint { display: flex; align-items: center; gap: 14px; color: rgba(255,255,255,.85); bottom: 26px; font-size: .65rem; right: max(5vw, 24px); min-height: 44px; }
@@ -90,8 +90,8 @@ h2 { font-size: clamp(1.8rem, 3.05vw, 2.8rem); letter-spacing: -.035em; }
 .showcase__chip--b { top: 42%; right: 0; }
 .showcase__chip--c { bottom: 0; left: 12%; }
 .showcase__word { font-size: clamp(4rem,14vw,12rem); }
-.marquee-band { padding-block: 22px; }
-.marquee-band__item { font-size: clamp(1rem,2.5vw,1.9rem); letter-spacing: -.02em; }
+.marquee { padding-block: 10px; }
+.marquee-band { padding-block: 22px; }.marquee-band__item { font-size: clamp(1rem,2.5vw,1.9rem); letter-spacing: -.02em; }
 .marquee-band__track { animation: rns-marquee 35s linear infinite; }
 @keyframes rns-marquee { to { transform: translateX(-50%); } }
 .marquee-band:hover .marquee-band__track { animation-play-state: paused; }
@@ -236,7 +236,7 @@ h2 { font-size: clamp(1.8rem, 3.05vw, 2.8rem); letter-spacing: -.035em; }
   .hero__title { font-size: clamp(2.25rem,9.7vw,3.7rem); line-height: 1.08; margin: 22px 0; }
   .hero__inner .lead { font-size: .98rem; line-height: 1.75; }
   .hero__badge { font-size: .57rem; letter-spacing: .08em; }
-  .hero__overlay { background: linear-gradient(90deg,rgba(20,22,58,.93),rgba(20,22,58,.66)); }
+  .hero__overlay { background: linear-gradient(90deg,rgba(16,18,50,.86),rgba(16,18,50,.52)), linear-gradient(0deg,rgba(8,10,26,.5),rgba(8,10,26,0) 55%); }
   .hero__photo img { object-position: 62% center; }
   .hero__hint { display: none; }
   .hero__actions { gap: 12px; }
@@ -318,6 +318,9 @@ h2 { font-size: clamp(1.8rem, 3.05vw, 2.8rem); letter-spacing: -.035em; }
 .floating-call::before { content: ''; position: absolute; inset: -5px; border: 2px solid var(--accent); border-radius: inherit; pointer-events: none; animation: call-pulse 2.8s ease-out infinite; }
 .floating-call:hover { background: var(--navy-700); color: white; }
 .floating-call:focus-visible { outline: 3px solid var(--navy-950); outline-offset: 5px; }
+.floating-whatsapp { position: fixed; z-index: 65; right: calc(max(20px, env(safe-area-inset-right)) + 68px); bottom: calc(20px + env(safe-area-inset-bottom)); display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: #25d366; color: #fff; box-shadow: 0 6px 22px rgba(12,13,36,.25); }
+.floating-whatsapp:hover { background: #1ebe5b; color: #fff; }
+.floating-whatsapp:focus-visible { outline: 3px solid var(--navy-950); outline-offset: 5px; }
 .to-top { right: max(24px, env(safe-area-inset-right)); bottom: calc(94px + env(safe-area-inset-bottom)); }
 @keyframes call-pulse { 0% { transform: scale(.9); opacity: .65; } 75%, 100% { transform: scale(1.35); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .floating-call::before { display: none; } }

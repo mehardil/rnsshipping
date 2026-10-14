@@ -71,7 +71,10 @@ export default function Footer() {
                 <li key={o.label}>
                   <Icon name="pin" size={18} />
                   <span>
-                    <strong style={{ color: '#fff' }}>{o.label}:</strong> {o.address}
+                    <strong style={{ color: '#fff' }}>{o.label}:</strong>{' '}
+                    <a href={o.map} target="_blank" rel="noopener noreferrer">
+                      {o.address}
+                    </a>
                   </span>
                 </li>
               ))}

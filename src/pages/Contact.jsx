@@ -21,6 +21,7 @@ export default function Contact() {
     if (services.some(service => service.title === subject)) setForm(value => ({ ...value, subject }))
   }, [params])
   const [sent, setSent] = useState(false)
+  const [activeOffice, setActiveOffice] = useState(0)
 
   const update = (e) => { e.target.setCustomValidity(''); setForm((f) => ({ ...f, [e.target.name]: e.target.value })) }
 
@@ -37,7 +38,7 @@ export default function Contact() {
     <>
       <Seo
         title="Contact RNS Shipping | Marine Services Dubai & Khorfakkan"
-        description="Contact RNS Shipping for ship repair, tank cleaning, chandelling and marine logistics in Dubai and the UAE. Call +971 55 539 6858 or email info@rnsshipping.com."
+        description="Contact RNS Shipping for ship repair, tank cleaning, chandelling and marine logistics in Dubai and the UAE. Call +971 55 539 6858, message us on WhatsApp or email info@rns-shipping.com."
         path="/contact"
         keywords="contact RNS Shipping, ship repair company Dubai contact, marine services UAE"
         image="/images/marine-2.jpg"
@@ -104,6 +105,17 @@ export default function Contact() {
                   <a href={`tel:${company.phoneHref}`}>{company.phone}</a>
                 </div>
               </div>
+              <div className="info-card">
+                <span className="info-card__icon">
+                  <Icon name="whatsapp" size={22} />
+                </span>
+                <div>
+                  <b>WhatsApp</b>
+                  <a href={company.whatsapp} target="_blank" rel="noopener noreferrer">
+                    Chat with us — fastest reply
+                  </a>
+                </div>
+              </div>
               {company.offices.map((o) => (
                 <div className="info-card" key={o.label}>
                   <span className="info-card__icon">
@@ -111,7 +123,9 @@ export default function Contact() {
                   </span>
                   <div>
                     <b>{o.label}</b>
-                    <span>{o.address}</span>
+                    <a href={o.map} target="_blank" rel="noopener noreferrer" className="info-card__address">
+                      {o.address}
+                    </a>
                   </div>
                 </div>
               ))}
@@ -126,8 +140,8 @@ export default function Contact() {
                   <div>
                     <h3 style={{ marginBottom: 4 }}>Your enquiry is ready, {form.name || 'there'}.</h3>
                     <p style={{ margin: 0 }}>
-                      Your details are ready below. Open your email app, review the draft and press Send to contact our operations team.
-                      For urgent matters, call{' '}
+                      Send it straight to our operations team on WhatsApp for the fastest reply, or open
+                      it as an email draft. For urgent matters, call{' '}
                       <a href={`tel:${company.phoneHref}`} style={{ color: 'var(--navy-700)' }}>
                         {company.phone}
                       </a>
@@ -135,6 +149,14 @@ export default function Contact() {
                     </p>
                   </div>
                 </div>
+                <a
+                  className="btn btn--whatsapp mt-40"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://wa.me/${company.whatsappNumber}?text=${encodeURIComponent('Name: ' + form.name + '\nEmail: ' + form.email + '\nPhone: ' + form.phone + '\nService: ' + form.subject + '\n\n' + form.message)}`}
+                >
+                  <Icon name="whatsapp" size={19} /> Send on WhatsApp
+                </a>
                 <a className="btn btn--primary mt-40" href={`mailto:${company.email}?subject=${encodeURIComponent(form.subject + ' enquiry - ' + form.name)}&body=${encodeURIComponent('Name: ' + form.name + '\nEmail: ' + form.email + '\nPhone: ' + form.phone + '\nService: ' + form.subject + '\n\n' + form.message)}`}>Open email draft <Icon name="arrow" size={18} /></a>
                 <button
                   type="button"
@@ -221,6 +243,14 @@ export default function Contact() {
                   Prepare Enquiry
                   <Icon name="arrow" size={18} className="btn__arrow" />
                 </button>
+                <a
+                  className="btn btn--whatsapp mt-40"
+                  href={`${company.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon name="whatsapp" size={19} /> Chat on WhatsApp — fastest reply
+                </a>
                 <p className="form__note">
                   Prefer email? Write to us at{' '}
                   <a href={`mailto:${company.email}`} style={{ color: 'var(--navy-700)' }}>
@@ -235,16 +265,76 @@ export default function Contact() {
 
       <section className="section section--tint" style={{ paddingTop: 0 }}>
         <div className="container">
-          <Reveal>
-            <div className="map-embed">
-              <iframe
-                title="RNS Shipping location — Business Bay, Dubai"
-                src="https://www.google.com/maps?q=Damac+XL+Tower+Business+Bay+Dubai&output=embed"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
+          <Reveal className="section-head center">
+            <span className="eyebrow eyebrow--center">Our Locations</span>
+            <h2>Find Us in Dubai</h2>
+            <p className="lead">
+              Visit our head office in Business Bay or our warehouse at Dubai Maritime City — tap a
+              location to highlight it, or open live directions in Google Maps.
+            </p>
           </Reveal>
+          <div className="locations">
+            <Reveal className="locations__list">
+              {company.offices.map((o, i) => (
+                <div className={`location-card ${i === activeOffice ? 'is-active' : ''}`} key={o.label}>
+                  <span className="location-card__icon">
+                    <Icon name="pin" size={22} />
+                  </span>
+                  <div className="location-card__body">
+                    <b>{o.label}</b>
+                    <a
+                      className="location-card__address"
+                      href={o.map}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {o.address}
+                    </a>
+                  </div>
+                  <button
+                    type="button"
+                    className="location-card__select"
+                    onClick={() => setActiveOffice(i)}
+                    aria-pressed={i === activeOffice}
+                  >
+                    {i === activeOffice ? 'On map' : 'View on map'}
+                  </button>
+                </div>
+              ))}
+              <a
+                className="location-card__directions"
+                href={company.offices[activeOffice].map}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="pin" size={16} /> Open {company.offices[activeOffice].label} in Google Maps
+                <Icon name="arrow" size={16} className="btn__arrow" />
+              </a>
+            </Reveal>
+            <Reveal className="locations__map" delay={90}>
+              <div className="locations__canvas">
+                <iframe
+                  title={`RNS Shipping — ${company.offices[activeOffice].label}, Dubai`}
+                  key={activeOffice}
+                  src={company.offices[activeOffice].embed}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <span className="locations__badge">
+                  <Icon name="pin" size={14} /> {company.offices[activeOffice].label}
+                </span>
+                <a
+                  className="locations__cta"
+                  href={company.offices[activeOffice].map}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon name="pin" size={15} /> Get directions
+                  <Icon name="arrow" size={15} className="btn__arrow" />
+                </a>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 
