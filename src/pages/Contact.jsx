@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import Seo from '../components/Seo'
 import Reveal from '../components/Reveal'
 import { Icon } from '../components/Icons'
 import { company, services, faqs } from '../data/site'
-import { disposeAll, flyIn, gsap, prefersReducedMotion } from '../lib/anim'
 
 const initial = {
   name: '',
@@ -15,52 +14,23 @@ const initial = {
 }
 
 export default function Contact() {
+  const [params] = useSearchParams()
   const [form, setForm] = useState(initial)
-  const [sent, setSent] = useState(false)
-
-  const update = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
-
-  /* Contact-only scroll flow */
   useEffect(() => {
-    if (prefersReducedMotion) return
-    const cleanups = []
-    const ctx = gsap.context(() => {
-      /* info cards fly in from the right, form from the left */
-      gsap.utils.toArray('.info-card').forEach((el, i) => {
-        cleanups.push(
-          flyIn(el, { from: 'right', distance: 120, start: 'top 88%', end: 'top 55%', scrub: 1.2 })
-        )
-        cleanups.push(
-          gsap.to(el, { y: -6, duration: 2 + (i % 4) * 0.25, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: i * 0.12 })
-        )
-      })
+    const subject = params.get('service')
+    if (services.some(service => service.title === subject)) setForm(value => ({ ...value, subject }))
+  }, [params])
+  const [sent, setSent] = useState(false)
+  const [activeOffice, setActiveOffice] = useState(0)
 
-      cleanups.push(
-        flyIn('.form', { from: 'left', distance: 120, start: 'top 88%', end: 'top 55%', scrub: 1.2 })
-      )
-
-      cleanups.push(
-        gsap.fromTo(
-          '.map-embed',
-          { clipPath: 'inset(0 0 100% 0)' },
-          {
-            clipPath: 'inset(0 0 0% 0)',
-            duration: 1.1,
-            ease: 'power4.out',
-            immediateRender: false,
-            scrollTrigger: { trigger: '.map-embed', start: 'top 85%', once: true },
-          }
-        )
-      )
-    })
-    return () => {
-      disposeAll(cleanups)
-      ctx.revert()
-    }
-  }, [])
+  const update = (e) => { e.target.setCustomValidity(''); setForm((f) => ({ ...f, [e.target.name]: e.target.value })) }
 
   const onSubmit = (e) => {
     e.preventDefault()
+    for (const name of ['name', 'message']) {
+      const field = e.currentTarget.elements.namedItem(name)
+      if (!field.value.trim()) { field.setCustomValidity('Please enter your ' + name + '.'); field.reportValidity(); return }
+    }
     setSent(true)
   }
 
@@ -68,7 +38,7 @@ export default function Contact() {
     <>
       <Seo
         title="Contact RNS Shipping | Marine Services Dubai & Khorfakkan"
-        description="Contact RNS Shipping for ship repair, tank cleaning, chandelling and marine logistics in Dubai and the UAE. Call +971 55 539 6858 or email info@rnsshipping.com."
+        description="Contact RNS Shipping for ship repair, tank cleaning, chandelling and marine logistics in Dubai and the UAE. Call +971 55 539 6858, message us on WhatsApp or email info@rns-shipping.com."
         path="/contact"
         keywords="contact RNS Shipping, ship repair company Dubai contact, marine services UAE"
         image="/images/marine-2.jpg"
@@ -80,7 +50,21 @@ export default function Contact() {
         }}
       />
 
-      <section className="page-hero">
+      <section className="page-hero page-hero--media">
+        <div className="page-hero__bg" aria-hidden="true">
+          <video
+            className="page-hero__bg-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/images/contact-poster.jpg"
+          >
+            <source src="/images/contact_video.mp4" media="(min-width: 768px)" type="video/mp4" />
+          </video>
+        </div>
+        <div className="page-hero__overlay" />
         <div className="container">
           <span className="eyebrow">Contact Us</span>
           <h1>We’d Love to Hear From You</h1>
@@ -121,6 +105,17 @@ export default function Contact() {
                   <a href={`tel:${company.phoneHref}`}>{company.phone}</a>
                 </div>
               </div>
+              <div className="info-card">
+                <span className="info-card__icon">
+                  <Icon name="whatsapp" size={22} />
+                </span>
+                <div>
+                  <b>WhatsApp</b>
+                  <a href={company.whatsapp} target="_blank" rel="noopener noreferrer">
+                    Chat with us — fastest reply
+                  </a>
+                </div>
+              </div>
               {company.offices.map((o) => (
                 <div className="info-card" key={o.label}>
                   <span className="info-card__icon">
@@ -128,7 +123,9 @@ export default function Contact() {
                   </span>
                   <div>
                     <b>{o.label}</b>
-                    <span>{o.address}</span>
+                    <a href={o.map} target="_blank" rel="noopener noreferrer" className="info-card__address">
+                      {o.address}
+                    </a>
                   </div>
                 </div>
               ))}
@@ -138,13 +135,13 @@ export default function Contact() {
           <Reveal delay={120}>
             {sent ? (
               <div className="form">
-                <div className="form__success">
+                <div className="form__success" role="status">
                   <Icon name="check" size={26} />
                   <div>
-                    <h3 style={{ marginBottom: 4 }}>Thank you, {form.name || 'there'}!</h3>
+                    <h3 style={{ marginBottom: 4 }}>Your enquiry is ready, {form.name || 'there'}.</h3>
                     <p style={{ margin: 0 }}>
-                      Your enquiry has been received. Our operations team will be in touch shortly.
-                      For urgent matters, call{' '}
+                      Send it straight to our operations team on WhatsApp for the fastest reply, or open
+                      it as an email draft. For urgent matters, call{' '}
                       <a href={`tel:${company.phoneHref}`} style={{ color: 'var(--navy-700)' }}>
                         {company.phone}
                       </a>
@@ -152,26 +149,37 @@ export default function Contact() {
                     </p>
                   </div>
                 </div>
+                <a
+                  className="btn btn--whatsapp mt-40"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://wa.me/${company.whatsappNumber}?text=${encodeURIComponent('Name: ' + form.name + '\nEmail: ' + form.email + '\nPhone: ' + form.phone + '\nService: ' + form.subject + '\n\n' + form.message)}`}
+                >
+                  <Icon name="whatsapp" size={19} /> Send on WhatsApp
+                </a>
+                <a className="btn btn--primary mt-40" href={`mailto:${company.email}?subject=${encodeURIComponent(form.subject + ' enquiry - ' + form.name)}&body=${encodeURIComponent('Name: ' + form.name + '\nEmail: ' + form.email + '\nPhone: ' + form.phone + '\nService: ' + form.subject + '\n\n' + form.message)}`}>Open email draft <Icon name="arrow" size={18} /></a>
                 <button
                   type="button"
                   className="btn btn--ghost mt-40"
                   onClick={() => {
-                    setForm(initial)
                     setSent(false)
                   }}
                 >
-                  Send another enquiry
+                  Edit enquiry
                 </button>
               </div>
             ) : (
               <form className="form" onSubmit={onSubmit}>
                 <h3>Contact Us Now</h3>
+                <p className="form__intro">Share your vessel name, port and required date. This form prepares an email draft; nothing is sent until you send it from your email app.</p>
                 <div className="form__row">
                   <div className="field">
                     <label htmlFor="name">Your Name *</label>
                     <input
                       id="name"
                       name="name"
+                      autoComplete="name"
+                      maxLength={120}
                       value={form.name}
                       onChange={update}
                       placeholder="Enter your name"
@@ -183,6 +191,8 @@ export default function Contact() {
                     <input
                       id="email"
                       name="email"
+                      autoComplete="email"
+                      maxLength={254}
                       type="email"
                       value={form.email}
                       onChange={update}
@@ -197,6 +207,9 @@ export default function Contact() {
                     <input
                       id="phone"
                       name="phone"
+                      type="tel"
+                      autoComplete="tel"
+                      maxLength={40}
                       value={form.phone}
                       onChange={update}
                       placeholder="United Arab Emirates +971"
@@ -219,6 +232,7 @@ export default function Contact() {
                   <textarea
                     id="message"
                     name="message"
+                    maxLength={3000}
                     value={form.message}
                     onChange={update}
                     placeholder="Vessel name, port, and your requirements…"
@@ -226,9 +240,17 @@ export default function Contact() {
                   />
                 </div>
                 <button type="submit" className="btn btn--primary">
-                  Send Enquiry
+                  Prepare Enquiry
                   <Icon name="arrow" size={18} className="btn__arrow" />
                 </button>
+                <a
+                  className="btn btn--whatsapp mt-40"
+                  href={`${company.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon name="whatsapp" size={19} /> Chat on WhatsApp — fastest reply
+                </a>
                 <p className="form__note">
                   Prefer email? Write to us at{' '}
                   <a href={`mailto:${company.email}`} style={{ color: 'var(--navy-700)' }}>
@@ -243,16 +265,76 @@ export default function Contact() {
 
       <section className="section section--tint" style={{ paddingTop: 0 }}>
         <div className="container">
-          <Reveal>
-            <div className="map-embed">
-              <iframe
-                title="RNS Shipping location — Business Bay, Dubai"
-                src="https://www.google.com/maps?q=Damac+XL+Tower+Business+Bay+Dubai&output=embed"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
+          <Reveal className="section-head center">
+            <span className="eyebrow eyebrow--center">Our Locations</span>
+            <h2>Find Us in Dubai</h2>
+            <p className="lead">
+              Visit our head office in Business Bay or our warehouse at Dubai Maritime City — tap a
+              location to highlight it, or open live directions in Google Maps.
+            </p>
           </Reveal>
+          <div className="locations">
+            <Reveal className="locations__list">
+              {company.offices.map((o, i) => (
+                <div className={`location-card ${i === activeOffice ? 'is-active' : ''}`} key={o.label}>
+                  <span className="location-card__icon">
+                    <Icon name="pin" size={22} />
+                  </span>
+                  <div className="location-card__body">
+                    <b>{o.label}</b>
+                    <a
+                      className="location-card__address"
+                      href={o.map}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {o.address}
+                    </a>
+                  </div>
+                  <button
+                    type="button"
+                    className="location-card__select"
+                    onClick={() => setActiveOffice(i)}
+                    aria-pressed={i === activeOffice}
+                  >
+                    {i === activeOffice ? 'On map' : 'View on map'}
+                  </button>
+                </div>
+              ))}
+              <a
+                className="location-card__directions"
+                href={company.offices[activeOffice].map}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="pin" size={16} /> Open {company.offices[activeOffice].label} in Google Maps
+                <Icon name="arrow" size={16} className="btn__arrow" />
+              </a>
+            </Reveal>
+            <Reveal className="locations__map" delay={90}>
+              <div className="locations__canvas">
+                <iframe
+                  title={`RNS Shipping — ${company.offices[activeOffice].label}, Dubai`}
+                  key={activeOffice}
+                  src={company.offices[activeOffice].embed}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <span className="locations__badge">
+                  <Icon name="pin" size={14} /> {company.offices[activeOffice].label}
+                </span>
+                <a
+                  className="locations__cta"
+                  href={company.offices[activeOffice].map}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon name="pin" size={15} /> Get directions
+                  <Icon name="arrow" size={15} className="btn__arrow" />
+                </a>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
 

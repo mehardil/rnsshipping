@@ -1,0 +1,24 @@
+/* Complete cards at each breakpoint; one viewport owns all loop movement. */
+.testi--ribbon { position: relative; padding: 18px clamp(20px, 4vw, 64px); background: radial-gradient(ellipse at 8% 40%, rgba(110,193,228,.22), transparent 60%), var(--tint); }
+.testi--ribbon .swiper { max-width: 1440px; padding-block: 18px; }
+.testi--ribbon .swiper-wrapper { align-items: stretch; }
+.testi--ribbon .swiper-slide { height: auto; }
+.testi--ribbon .testi-card { height: 100%; min-height: 340px; padding: clamp(22px, 2vw, 30px); gap: 16px; border: 1px solid var(--line); border-radius: 20px; background: white; box-shadow: inset -5px 0 0 var(--line); transition: transform .3s ease, border-color .3s ease; }
+.testi--ribbon .testi-card__quote { font-size: 1rem; line-height: 1.75; color: var(--ink); }
+.testi--ribbon .testi-card__stars { gap: 6px; }
+.testi--ribbon .testi-card__author { margin-top: auto; padding-top: 14px; }
+.testi--ribbon .testi-card__author > span:last-child { min-width: 0; }
+.testi--ribbon:focus-visible { outline-offset: -4px; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .testi--ribbon .testi-card:hover { transform: translateY(-6px); border-color: var(--navy-700); }
+}
+@media (max-width: 699px) {
+  .testi--ribbon { padding-block: 12px; }
+  .testi--ribbon .testi-card { min-height: 0; padding: 22px 20px; border-radius: 16px; }
+  .testi--ribbon .testi-card__quote { font-size: .96rem; }
+  .testi--ribbon .testi-card__author b { font-size: .87rem; }
+}
+[data-motion="paused"] .testi--ribbon .testi-card:hover { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .testi--ribbon *, .testi--ribbon *::before, .testi--ribbon *::after { transition-duration: 0s !important; }
+}

@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import './styles/index.css'
+import './styles/refinement.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const app = (
   <React.StrictMode>
-    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>
 )
+
+const root = document.getElementById('root')
+if (root.hasChildNodes() && root.dataset.route?.replace(/\/$/, '') === window.location.pathname.replace(/\/$/, '')) ReactDOM.hydrateRoot(root, app)
+else ReactDOM.createRoot(root).render(app)

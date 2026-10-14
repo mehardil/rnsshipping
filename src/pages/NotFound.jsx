@@ -9,6 +9,7 @@ export default function NotFound() {
         title="Page Not Found"
         description="The page you are looking for could not be found. Return to RNS Shipping home."
         path="/404"
+        noindex
       />
       <section className="page-hero" style={{ minHeight: '70vh', display: 'grid', placeItems: 'center' }}>
         <div className="container center">

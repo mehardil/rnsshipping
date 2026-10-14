@@ -4,17 +4,27 @@ export const company = {
   tagline: 'Marine Excellence, Delivered.',
   phone: '+971 55 539 6858',
   phoneHref: '+971555396858',
-  email: 'info@rnsshipping.com',
+  email: 'info@rns-shipping.com',
   website: 'https://rnsshipping.com',
+  whatsappNumber: '971555396858',
+  whatsapp:
+    'https://wa.me/971555396858?text=Hi%20RNS%20Shipping%2C%20I%27d%20like%20to%20make%20a%20quick%20enquiry%20about%20your%20marine%20services.',
   experience: 35,
   offices: [
     {
       label: 'Head Office',
       address: '2209, Damac XL Tower, Business Bay, Dubai, UAE',
+      map: 'https://www.google.com/maps/search/?api=1&query=2209+Damac+XL+Tower+Business+Bay+Dubai',
+      embed: 'https://www.google.com/maps?q=2209+Damac+XL+Tower+Business+Bay+Dubai&z=16&output=embed',
     },
     {
       label: 'Warehouse',
-      address: 'W-341, Dubai Maritime City (DMC), Dubai, UAE',
+      address: 'Warehouse — Umm Hurair 2, Office 13, DMC W-341, Dubai Maritime City, Dubai, UAE',
+      placeId: 'ChIJ1_yucPVDXz4RcLjmV38H98o',
+      lat: 25.2433831,
+      lng: 55.3104438,
+      map: 'https://www.google.com/maps/search/?api=1&query=RNS+SHIPPING&query_place_id=ChIJ1_yucPVDXz4RcLjmV38H98o',
+      embed: 'https://www.google.com/maps?q=RNS+SHIPPING&query_place_id=ChIJ1_yucPVDXz4RcLjmV38H98o&z=16&output=embed',
     },
   ],
   social: [
@@ -28,7 +38,7 @@ export const company = {
     },
     {
       label: 'WhatsApp',
-      href: 'https://api.whatsapp.com/send?phone=971555396858&text=Hi%20RNS%20Shipping%2C%20I%E2%80%99d%20like%20to%20discuss%20how%20your%20services%20can%20support%20our%20vessel%20operations.',
+      href: 'https://wa.me/971555396858?text=Hi%20RNS%20Shipping%2C%20I%27d%20like%20to%20make%20a%20quick%20enquiry%20about%20your%20marine%20services.',
     },
   ],
 }
@@ -47,7 +57,7 @@ export const services = [
     title: 'Technical Servicing',
     short:
       'Comprehensive maintenance and repair solutions carried out by experienced marine engineers and technicians.',
-    image: '/images/rns-port-cranes.webp',
+    image: '/images/marine-engine-room.webp',
     icon: 'wrench',
     intro:
       'Our comprehensive technical servicing ensures your vessel operates at peak performance and reliability. We offer a wide range of maintenance and repair solutions carried out by experienced marine engineers and technicians.',
@@ -110,7 +120,7 @@ export const services = [
     title: 'Marine Automation',
     short:
       'Advanced automation solutions that enhance vessel efficiency, safety and performance.',
-    image: '/images/rns-ship-bow.webp',
+    image: '/images/marine-control-room.webp',
     icon: 'automation',
     intro:
       'We deliver advanced marine automation solutions designed to enhance vessel efficiency, safety and performance. Our team provides installation, maintenance and troubleshooting of automated systems critical to ship operations.',
@@ -130,8 +140,20 @@ export const services = [
 export const stats = [
   { value: 35, suffix: '+', label: 'Years of Experience' },
   { value: 500, suffix: '+', label: 'Vessels Supported' },
-  { value: 24, suffix: '/7', label: 'Operational Support' },
-  { value: 100, suffix: '%', label: 'Commitment to Quality' },
+  { value: 25, suffix: '/7', label: 'Operational Support' },
+  { value: 99, suffix: '%', label: 'Commitment to Quality' },
+]
+
+export const regions = [
+  { name: 'United Arab Emirates', note: 'Head office, warehouse and operations from Dubai, Jebel Ali and Khorfakkan.' },
+  { name: 'GCC', note: 'Gulf-wide mobilisation for repairs, tank cleaning and supplies.' },
+  { name: 'Saudi Arabia', note: 'Vessel support, technical attendance and logistics across Saudi ports.' },
+  { name: 'India', note: 'Spares sourcing, supplier network and technical support.' },
+  { name: 'Pakistan', note: 'Marine supplies, crew coordination and support services.' },
+  { name: 'United Kingdom', note: 'European supplier and logistics coordination.' },
+  { name: 'Europe', note: 'Spare parts, marine supplies and technical partners.' },
+  { name: 'Estonia', note: 'Baltic region sourcing and logistics support.' },
+  { name: 'United States', note: 'Global spares sourcing and OEM coordination.' },
 ]
 
 export const testimonials = [
@@ -167,7 +189,6 @@ export const clients = [
   { name: 'Client Partner', logo: '/images/client-2.png' },
   { name: 'Client Partner', logo: '/images/client-3.png' },
   { name: 'Client Partner', logo: '/images/client-4.png' },
-  { name: 'Client Partner', logo: '/images/client-5.png' },
 ]
 
 export const whyChoose = [
