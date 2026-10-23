@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /portal
+Disallow: /api/
 
 Sitemap: https://rnsshipping.com/sitemap.xml

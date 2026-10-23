@@ -113,6 +113,14 @@ export default function Navbar() {
             <Link to="/contact" className="btn btn--primary nav__cta">
               Request a Quote
             </Link>
+            <a
+              href={company.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn--whatsapp nav__cta nav__cta--whatsapp"
+            >
+              <Icon name="whatsapp" size={17} /> WhatsApp Us
+            </a>
           </nav>
 
           <button

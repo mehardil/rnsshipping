@@ -5,6 +5,7 @@ import { Icon } from './Icons'
 import '../styles/service-orbit.css'
 
 export default function ServiceOrbit() {
+  const orbitServices = services.slice(0, 4)
   const [active, setActive] = useState(0)
   const [ready, setReady] = useState(false)
   const [scrollMode, setScrollMode] = useState(false)
@@ -34,7 +35,7 @@ export default function ServiceOrbit() {
         if (travel <= 0) return
         const progress = Math.max(0, Math.min(1, -journey.current.getBoundingClientRect().top / travel))
         stage.current.style.setProperty('--scroll-rotation', `${-54 + progress * 108}deg`)
-        setActive(Math.round(progress * (services.length - 1)))
+        setActive(Math.round(progress * (orbitServices.length - 1)))
       })
     }
     window.addEventListener('scroll', update, { passive: true })
@@ -48,15 +49,15 @@ export default function ServiceOrbit() {
     if (scrollMode) {
       const start = window.scrollY + journey.current.getBoundingClientRect().top
       const travel = journey.current.offsetHeight - stage.current.offsetHeight
-      window.scrollTo({ top: start + travel * index / (services.length - 1), behavior: 'instant' })
+      window.scrollTo({ top: start + travel * index / (orbitServices.length - 1), behavior: 'instant' })
     }
   }
   const onKeyDown = (event, index) => {
     let next
-    if (['ArrowRight', 'ArrowDown'].includes(event.key)) next = (index + 1) % services.length
-    if (['ArrowLeft', 'ArrowUp'].includes(event.key)) next = (index + services.length - 1) % services.length
+    if (['ArrowRight', 'ArrowDown'].includes(event.key)) next = (index + 1) % orbitServices.length
+    if (['ArrowLeft', 'ArrowUp'].includes(event.key)) next = (index + orbitServices.length - 1) % orbitServices.length
     if (event.key === 'Home') next = 0
-    if (event.key === 'End') next = services.length - 1
+    if (event.key === 'End') next = orbitServices.length - 1
     if (next === undefined) return
     event.preventDefault()
     select(next)
@@ -76,10 +77,10 @@ export default function ServiceOrbit() {
             <div className="service-orbit__selector">
               <div className="service-orbit__dial" aria-hidden="true" style={{ '--rotation': `${-54 + active * 36}deg` }}>
                 <div className="service-orbit__ring" />
-                <div className="service-orbit__hub"><span>RNS / SERVICES</span><b>{services[active].num}</b><small>OF 04</small></div>
+                <div className="service-orbit__hub"><span>RNS / SERVICES</span><b>{orbitServices[active].num}</b><small>OF {String(orbitServices.length).padStart(2, '0')}</small></div>
               </div>
               <div className="service-orbit__tabs" role="tablist" aria-label="Marine service divisions">
-                {services.map((service, index) => (
+                {orbitServices.map((service, index) => (
                   <button key={service.slug} ref={el => { tabs.current[index] = el }} type="button" role="tab"
                     id={`orbit-tab-${service.slug}`} aria-controls={`orbit-panel-${service.slug}`} aria-selected={active === index}
                     tabIndex={active === index ? 0 : -1} onClick={() => select(index)} onKeyDown={event => onKeyDown(event, index)}
@@ -91,12 +92,12 @@ export default function ServiceOrbit() {
               <p className="service-orbit__hint"><Icon name="arrow" size={16} />{scrollMode ? 'Scroll to explore / select a division' : 'Select a division to explore'}</p>
             </div>
             <div className="service-orbit__panels">
-              {services.map((service, index) => (
+              {orbitServices.map((service, index) => (
                 <article className="service-orbit__panel" key={service.slug} role="tabpanel" id={`orbit-panel-${service.slug}`}
                   aria-labelledby={`orbit-tab-${service.slug}`} hidden={ready && active !== index} tabIndex={0}>
                   <div className="service-orbit__media">
                     <img src={service.image} alt={service.title} loading="lazy" width="900" height="600" />
-                    <span className="service-orbit__badge"><Icon name={service.icon} size={24} />{service.num} / 04</span>
+                    <span className="service-orbit__badge"><Icon name={service.icon} size={24} />{service.num} / {String(orbitServices.length).padStart(2, '0')}</span>
                   </div>
                   <div className="service-orbit__copy">
                     <h3>{service.title}</h3><p>{service.short}</p>

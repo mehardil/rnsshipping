@@ -18,9 +18,13 @@ npm run build
 npm run preview
 ```
 
-The build generates static HTML for Home, About, Services, Contact and four individual service guides. Every route includes its content, title, description, canonical, social metadata and structured data before JavaScript runs. React hydrates these pages for interactive navigation and motion. Both `route.html` and `route/index.html` are generated for clean-URL hosts. The canonical domain is `https://rnsshipping.com`.
+The build generates static HTML for Home, About, Services, Contact, the Insights hub, every article and six individual service guides. Every route includes its content, title, description, canonical, social metadata and structured data before JavaScript runs. React hydrates these pages for interactive navigation and motion. Both `route.html` and `route/index.html` are generated for clean-URL hosts. The canonical domain is `https://rnsshipping.com`.
 
 Deploy the contents of `dist/` to a static host. Serve each route's own generated HTML; do not rewrite all known routes to the home page. Configure unknown URLs to return `404.html` with HTTP status 404. For Nginx, use `try_files $uri $uri.html $uri/ =404;` with `error_page 404 /404.html;`. The local Vite preview is not a production host and uses an SPA fallback for unknown paths. Submit `/sitemap.xml` in the verified Search Console property after deployment. Live indexing, ranking, field performance and host response headers are not verified by local tests.
+
+## Insights portal
+
+The editorial portal lives at `/portal`. See [PORTAL.md](PORTAL.md) for local preview commands, production environment variables, publishing flow and the full URL list. Publishing requires the Netlify Functions in `netlify/functions/`; a plain static host will return 404 for `/api/login`.
 
 ## Contact enquiries
 

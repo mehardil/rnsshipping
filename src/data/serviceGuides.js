@@ -1,4 +1,42 @@
 export const serviceGuides = {
+  'ship-repair-maintenance': {
+    heading: 'Ship Repair & Maintenance Services in Dubai',
+    description: 'Ship repair and maintenance in Dubai, Jebel Ali and Khorfakkan for engines, machinery, electrical systems, welding and urgent technical attendance.',
+    image: '/images/marine-engine-room.webp',
+    heroImage: '/images/marine-engine-room-hero.webp',
+    alt: 'Marine engineers working on ship engine room machinery',
+    overview: 'A repair requirement is shaped by the vessel’s schedule, the equipment involved and the working window available at the port. RNS Shipping brings engine, machinery, electrical and fabrication support together so ship managers can discuss a complete technical scope with one operations team.',
+    sections: [
+      ['Engine and machinery repairs in Dubai', 'Main and auxiliary engine work starts with clear identification: maker, model, serial number, running hours and the symptoms observed. Photographs, alarm history and any recent maintenance records help the team prepare the right technicians, tools and parts before attending the vessel.'],
+      ['Electrical, motor and control support', 'Electrical faults can stop machinery, cargo operations or essential services. Our scope includes fault finding, motor rewinding and repair support for vessel equipment. Include panel photographs, alarm messages and wiring information where available so the technical review can begin before mobilisation.'],
+      ['Welding, fabrication and emergency attendance', 'Onboard welding and workshop fabrication support structural repairs, brackets, pipework and renewal work. For urgent requirements, the operations desk reviews the location, access and scope to agree a realistic attendance plan.'],
+    ],
+    checklist: ['Vessel name, IMO number and local agent', 'Port, berth or anchorage and expected arrival', 'Equipment maker, model and serial number', 'Fault symptoms, photographs and alarm details', 'Required working window and access arrangements'],
+    faqs: [
+      ['Can repairs be carried out without drydocking?', 'Many engine, machinery, electrical, welding and tank-related tasks can be completed afloat alongside or at anchorage. Work that requires the hull to be exposed, such as coating renewal, normally needs a drydock or specialist arrangement.'],
+      ['How quickly can a team attend?', 'Urgent requirements can often be attended within hours, depending on the port, berth or anchorage and the team’s current workload. Confirm the mobilisation window for the specific vessel location.'],
+      ['Do you supply spare parts as well?', 'Yes. RNS Shipping coordinates spare parts through its supplier and logistics network, including Caterpillar and Yanmar requirements. Share the maker, model, serial and part number to start the review.'],
+    ],
+  },
+  'ship-cleaning': {
+    heading: 'Ship Cleaning & Tank Cleaning Services in Dubai',
+    description: 'Cargo tank, hold, ballast, fuel and bilge cleaning for vessels in Dubai, Jebel Ali and Khorfakkan, with compliance-aware planning and waste documentation.',
+    image: '/images/rns-containers.webp',
+    heroImage: '/images/rns-ship-bow.webp',
+    alt: 'Cargo holds and marine equipment prepared for cleaning',
+    overview: 'Cleaning is preparation for what comes next: the next cargo, the next inspection or the next repair. RNS Shipping plans tank and hold cleaning around the required standard, the vessel’s schedule and the compliance controls that apply in UAE waters.',
+    sections: [
+      ['Cargo tank and hold cleaning', 'Send the previous cargo, next cargo or inspection standard, tank or hold numbers and any surveyor requirement. The method, chemicals, manning and drying time follow from those details. The acceptance standard should be agreed before washing begins.'],
+      ['Ballast, fuel and bilge cleaning', 'Ballast tank sediment removal supports inspection and repair. Fuel and lube oil tank cleaning is confined-space work requiring gas testing, permits and controlled sludge handling. Bilge and engine room cleaning prepares machinery spaces for inspection and reduces fire risk.'],
+      ['Slops, safety and documentation', 'Washings and residues must go to an approved reception facility with the correct records. Confirm collection, transfer and receipts as part of the cleaning scope, together with the permits, gas tests and safety arrangements required for the job.'],
+    ],
+    checklist: ['Tank or hold numbers and capacity', 'Previous cargo and next cargo requirement', 'Required cleaning or inspection standard', 'Vessel location, ETA and working window', 'Slop disposal and documentation requirements'],
+    faqs: [
+      ['How long does tank cleaning take?', 'A simple like-for-like wash can take around 12 to 24 hours. Multi-tank cleaning to a wall-wash standard after a heavy cargo can take several days. Access, residue, coating and surveyor availability all affect the schedule.'],
+      ['Do you handle slop disposal?', 'Yes. RNS Shipping coordinates slop handling through approved reception arrangements and provides records for the vessel. Confirm the disposal scope in the quotation.'],
+      ['Can cleaning be coordinated with repairs?', 'Yes. Cleaning often reveals valve, coating or pump work. Coordinating cleaning and technical repair through one operations desk reduces the gap between scopes.'],
+    ],
+  },
   'technical-services': {
     heading: 'Ship Repair & Technical Services in the UAE',
     description: 'Ship repair, tank cleaning, engine maintenance and marine technical servicing in Dubai, Jebel Ali and Khorfakkan. Discuss your vessel requirements with RNS Shipping.',

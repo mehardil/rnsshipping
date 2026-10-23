@@ -9,6 +9,7 @@ import MarqueeBand from '../components/MarqueeBand'
 import ShipShowcase from '../components/ShipShowcase'
 import PortSupport from '../components/PortSupport'
 import Regions from '../components/Regions'
+import LatestInsights from '../components/LatestInsights'
 import { Icon } from '../components/Icons'
 import { services, stats, whyChoose, company, clients } from '../data/site'
 
@@ -28,7 +29,7 @@ export default function Home() {
       {/* ---------------- HERO ---------------- */}
       <section className="hero">
         <div className="hero__photo" aria-hidden="true">
-          <img src="/images/harbour-evening.webp" srcSet="/images/harbour-evening-small.webp 800w, /images/harbour-evening.webp 1800w" sizes="100vw" width="1800" height="1200" fetchpriority="high" alt="" />
+          <img src="/images/rns-ship-hero.webp" width="1920" height="1020" fetchpriority="high" alt="" />
         </div>
         <div className="hero__overlay" />
         <div className="container">
@@ -46,13 +47,6 @@ export default function Home() {
               marine supplies for ship owners and managers worldwide.
             </p>
             <div className="hero__actions">
-              <Link to="/contact" className="btn btn--accent">
-                Request a Quote
-                <Icon name="arrow" size={18} className="btn__arrow" />
-              </Link>
-              <a href={company.whatsapp} target="_blank" rel="noopener noreferrer" className="btn btn--whatsapp">
-                <Icon name="whatsapp" size={19} /> WhatsApp Us
-              </a>
               <Link to="/services" className="btn btn--ghost-light">
                 Explore Services
               </Link>
@@ -232,6 +226,8 @@ export default function Home() {
         </div>
         <Testimonials />
       </section>
+
+      <LatestInsights />
 
       {/* ---------------- CTA ---------------- */}
       <section className="section" style={{ paddingTop: 0 }}>

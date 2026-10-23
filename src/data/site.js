@@ -47,13 +47,52 @@ export const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Services', to: '/services' },
+  { label: 'Insights', to: '/insights' },
   { label: 'Contact', to: '/contact' },
 ]
 
 export const services = [
   {
-    slug: 'technical-services',
+    slug: 'ship-repair-maintenance',
     num: '01',
+    title: 'Ship Repair & Maintenance',
+    short:
+      'Technical repair and planned maintenance for engines, machinery, electrical systems and vessel structures.',
+    image: '/images/marine-engine-room.webp',
+    icon: 'wrench',
+    intro:
+      'RNS Shipping delivers technical ship repair and maintenance for vessels calling at Dubai, Jebel Ali, Dubai Maritime City and Khorfakkan. Our engineers and technicians attend afloat, alongside or at anchorage for planned work, breakdowns and combined port-call scopes.',
+    items: [
+      { name: 'Engine & Machinery Repairs', desc: 'Main and auxiliary engine maintenance, troubleshooting, pumps and associated machinery.' },
+      { name: 'Piston & Valve Work', desc: 'Piston change, skirt renewal and valve spindle overhauling carried out by experienced technicians.' },
+      { name: 'Electrical & Motor Rewinding', desc: 'Fault finding, electrical repairs and motor rewinding for vessel equipment.' },
+      { name: 'Welding & Fabrication', desc: 'Onboard and workshop welding, steel fabrication and repair support.' },
+      { name: 'Emergency Technical Attendance', desc: 'Rapid response for breakdowns and urgent technical requirements at UAE ports.' },
+      { name: 'Planned Maintenance Support', desc: 'Scheduled maintenance scopes coordinated around the vessel’s operating window.' },
+    ],
+  },
+  {
+    slug: 'ship-cleaning',
+    num: '02',
+    title: 'Ship Cleaning & Tank Cleaning',
+    short:
+      'Cargo tank, hold, ballast, fuel and bilge cleaning with clear compliance and waste documentation.',
+    image: '/images/rns-containers.webp',
+    icon: 'ship',
+    intro:
+      'From cargo tank preparation to hold cleaning and engine room degreasing, RNS Shipping plans cleaning scopes around the next cargo, the required inspection standard and the vessel’s port schedule. Slop handling, safety controls and documentation are agreed as part of the scope.',
+    items: [
+      { name: 'Cargo Tank Cleaning', desc: 'Pre-wash, main wash, chemical treatment, drying and inspection preparation.' },
+      { name: 'Cargo Hold Cleaning', desc: 'Hold preparation for grain, food-grade and general cargo standards.' },
+      { name: 'Ballast Tank Cleaning', desc: 'Sediment removal and preparation for coating inspection or repair.' },
+      { name: 'Fuel & Lube Oil Tanks', desc: 'Sludge removal, gas freeing and confined-space entry preparation.' },
+      { name: 'Bilge & Engine Room Cleaning', desc: 'Degreasing, tank top cleaning and machinery space preparation.' },
+      { name: 'Slop Handling & Documentation', desc: 'Approved waste reception coordination with records for the vessel.' },
+    ],
+  },
+  {
+    slug: 'technical-services',
+    num: '03',
     title: 'Technical Servicing',
     short:
       'Comprehensive maintenance and repair solutions carried out by experienced marine engineers and technicians.',
@@ -72,7 +111,7 @@ export const services = [
   },
   {
     slug: 'ship-chandelling',
-    num: '02',
+    num: '04',
     title: 'Ship Chandelling',
     short:
       'Complete ship chandelling solutions with quality, reliable and timely delivery of marine supplies.',
@@ -95,7 +134,7 @@ export const services = [
   },
   {
     slug: 'spare-parts-logistics',
-    num: '03',
+    num: '05',
     title: 'Ship Spare & Logistics',
     short:
       'Efficient worldwide handling and transportation of marine spare parts through air, sea and land.',
@@ -116,7 +155,7 @@ export const services = [
   },
   {
     slug: 'automation',
-    num: '04',
+    num: '06',
     title: 'Marine Automation',
     short:
       'Advanced automation solutions that enhance vessel efficiency, safety and performance.',

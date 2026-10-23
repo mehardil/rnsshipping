@@ -1,0 +1,110 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/portal/*"
+  to = "/portal.html"
+  status = 200
+
+# WordPress migration — preserve indexed URLs and rankings
+[[redirects]]
+  from = "/about/"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/services/"
+  to = "/services"
+  status = 301
+
+[[redirects]]
+  from = "/contact-us/"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/marine-services/"
+  to = "/services"
+  status = 301
+
+[[redirects]]
+  from = "/ship-repair-maintenance-services/"
+  to = "/services/ship-repair-maintenance"
+  status = 301
+
+[[redirects]]
+  from = "/ship-marine-engineering-services/"
+  to = "/services/ship-repair-maintenance"
+  status = 301
+
+[[redirects]]
+  from = "/ship-marine-tank-cleaning-services/"
+  to = "/services/ship-cleaning"
+  status = 301
+
+[[redirects]]
+  from = "/ship-repair-companies-in-uae/"
+  to = "/insights/ship-repair-companies-in-uae"
+  status = 301
+
+[[redirects]]
+  from = "/best-ship-repairing-services-in-dubai-your-complete-guide-to-reliable-marine-repair-solutions/"
+  to = "/insights/ship-repairing-companies-in-dubai"
+  status = 301
+
+[[redirects]]
+  from = "/best-ship-repair-in-dubai-uae-why-rns-shipping-is-the-trusted-choice-for-vessel-owners/"
+  to = "/insights/ship-repairing-companies-in-dubai"
+  status = 301
+
+[[redirects]]
+  from = "/ship-cleaning-service-in-dubai/"
+  to = "/insights/ship-cleaning-services-in-dubai"
+  status = 301
+
+[[redirects]]
+  from = "/ship-tank-cleaning-jebel-ali-guide/"
+  to = "/insights/ship-tank-cleaning-jebel-ali-guide"
+  status = 301
+
+[[redirects]]
+  from = "/cache/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/category/uncategorized/"
+  to = "/insights"
+  status = 301
+
+[[redirects]]
+  from = "/author/maziz/"
+  to = "/about"
+  status = 301
+
+[[redirects]]
+  from = "/sitemap_index.xml"
+  to = "/sitemap.xml"
+  status = 301
+
+[[redirects]]
+  from = "/feed/"
+  to = "/rss.xml"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

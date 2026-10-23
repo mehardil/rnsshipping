@@ -76,6 +76,83 @@ export const Icon = ({ name, size = 22, ...rest }) => {
           <path d="M20 6 9 17l-5-5" />
         </svg>
       )
+    case 'grid':
+      return (
+        <svg {...common}>
+          <rect x="3" y="3" width="7" height="7" rx="1.5" />
+          <rect x="14" y="3" width="7" height="7" rx="1.5" />
+          <rect x="3" y="14" width="7" height="7" rx="1.5" />
+          <rect x="14" y="14" width="7" height="7" rx="1.5" />
+        </svg>
+      )
+    case 'link':
+      return (
+        <svg {...common}>
+          <path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.2 1.2" />
+          <path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.2-1.2" />
+        </svg>
+      )
+    case 'edit':
+      return (
+        <svg {...common}>
+          <path d="M12 20h9" />
+          <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+        </svg>
+      )
+    case 'trash':
+      return (
+        <svg {...common}>
+          <path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6M10 11v6M14 11v6" />
+        </svg>
+      )
+    case 'plus':
+      return (
+        <svg {...common}>
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+      )
+    case 'logout':
+      return (
+        <svg {...common}>
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+        </svg>
+      )
+    case 'eye':
+      return (
+        <svg {...common}>
+          <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      )
+    case 'image':
+      return (
+        <svg {...common}>
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <circle cx="8.5" cy="8.5" r="1.5" />
+          <path d="m21 15-5-5L5 21" />
+        </svg>
+      )
+    case 'tag':
+      return (
+        <svg {...common}>
+          <path d="M20.6 13.4 12 22l-9-9V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z" />
+          <circle cx="7.5" cy="7.5" r="1.2" />
+        </svg>
+      )
+    case 'search':
+      return (
+        <svg {...common}>
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" />
+        </svg>
+      )
+    case 'save':
+      return (
+        <svg {...common}>
+          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" />
+          <path d="M17 21v-8H7v8M7 3v5h8" />
+        </svg>
+      )
     case 'menu':
       return (
         <svg {...common}>
