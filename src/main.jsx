@@ -14,6 +14,7 @@ const app = (
   </React.StrictMode>
 )
 
+
 const root = document.getElementById('root')
 if (root.hasChildNodes() && root.dataset.route?.replace(/\/$/, '') === window.location.pathname.replace(/\/$/, '')) ReactDOM.hydrateRoot(root, app)
 else ReactDOM.createRoot(root).render(app)
