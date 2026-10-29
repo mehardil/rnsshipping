@@ -49,9 +49,16 @@ bundled Node server, which serves `dist/` and implements the portal API with loc
 
 ```sh
 npm ci
-npm run build
 npm start
 ```
+
+`npm start` runs `scripts/start.mjs`, builds `dist/` automatically when it is missing (or when
+`BUILD_ON_START=true`), then starts the Node server. You can still run `npm run build` first if
+you prefer. Use `npm run start:server` to start without the build check, or `npm run start:prod`
+to force a fresh build before starting.
+
+If the Hostinger Node.js app setup asks for an application startup file, use `server.js` in the
+repository root. It starts the same server by default.
 
 `npm start` listens on `127.0.0.1:3000` by default. Put Nginx in front of it and proxy all
 requests, including `/api/*`. Do not add a separate static `try_files` block for `/api`.
