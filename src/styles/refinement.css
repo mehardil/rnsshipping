@@ -327,3 +327,77 @@ h2 { font-size: clamp(1.8rem, 3.05vw, 2.8rem); letter-spacing: -.035em; }
 .to-top { right: max(24px, env(safe-area-inset-right)); bottom: calc(94px + env(safe-area-inset-bottom)); }
 @keyframes call-pulse { 0% { transform: scale(.9); opacity: .65; } 75%, 100% { transform: scale(1.35); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .floating-call::before { display: none; } }
+
+/* About hero: full-size and as crisp as the home hero. */
+.page-hero.page-hero--about-photo {
+  min-height: clamp(560px, 88svh, 940px);
+  padding: clamp(140px, 16vh, 200px) 0 clamp(90px, 11vh, 140px);
+}
+@media (max-width: 960px) {
+  .page-hero.page-hero--about-photo {
+    min-height: clamp(520px, 84svh, 760px);
+    padding: 130px 0 90px;
+  }
+}
+.page-hero--about-photo .page-hero__bg img {
+  animation: none;
+  transform: none;
+  object-position: 62% 52%;
+  filter: brightness(1.14) saturate(1.18) contrast(1.04);
+  will-change: auto;
+}
+.page-hero--about-photo .page-hero__bg::before {
+  background: none;
+}
+.page-hero--about-photo .page-hero__overlay {
+  background:
+    linear-gradient(100deg, rgba(10, 12, 32, .92) 0%, rgba(13, 16, 44, .72) 34%, rgba(13, 16, 44, .22) 62%, rgba(13, 16, 44, 0) 100%),
+    linear-gradient(0deg, rgba(6, 8, 24, .5), transparent 42%);
+}
+@media (max-width: 680px) {
+  .page-hero.page-hero--about-photo {
+    min-height: clamp(480px, 78svh, 620px);
+    padding: 96px 0 70px;
+  }
+  .page-hero--about-photo .page-hero__bg img { object-position: 58% 48%; filter: brightness(1.1) saturate(1.14) contrast(1.03); }
+  .page-hero--about-photo .page-hero__overlay {
+    background:
+      linear-gradient(180deg, rgba(10, 12, 32, .62) 0%, rgba(10, 12, 32, .78) 48%, rgba(10, 12, 32, .9) 100%),
+      linear-gradient(0deg, rgba(10, 12, 32, .45), transparent 52%);
+  }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .page-hero.page-hero--about-photo {
+    min-height: 440px;
+    padding: 84px 0 48px;
+  }
+}
+
+/* Services hero: taller at every breakpoint and full-bleed video. */
+.page-hero.page-hero--services-video {
+  min-height: clamp(600px, 92svh, 1040px);
+  padding: clamp(150px, 17vh, 210px) 0 clamp(100px, 12vh, 150px);
+}
+.page-hero--services-video .page-hero__video {
+  object-position: center 52%;
+  opacity: .9;
+  filter: brightness(1.05) saturate(1.06);
+}
+@media (max-width: 960px) {
+  .page-hero.page-hero--services-video {
+    min-height: clamp(560px, 88svh, 820px);
+    padding: 140px 0 96px;
+  }
+}
+@media (max-width: 680px) {
+  .page-hero.page-hero--services-video {
+    min-height: clamp(520px, 84svh, 680px);
+    padding: 100px 0 74px;
+  }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .page-hero.page-hero--services-video {
+    min-height: 480px;
+    padding: 88px 0 52px;
+  }
+}

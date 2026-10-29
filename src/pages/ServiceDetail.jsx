@@ -4,6 +4,7 @@ import { serviceGuides } from '../data/serviceGuides'
 import Seo from '../components/Seo'
 import Reveal from '../components/Reveal'
 import { Icon } from '../components/Icons'
+import { heroImageSet } from '../lib/imageSets'
 import NotFound from './NotFound'
 
 export default function ServiceDetail() {
@@ -11,10 +12,11 @@ export default function ServiceDetail() {
   const service = services.find(item => item.slug === slug)
   const guide = serviceGuides[slug]
   if (!service || !guide) return <NotFound />
+  const hero = heroImageSet(guide.heroImage || guide.image)
   return <>
-    <Seo title={guide.heading} description={guide.description} path={`/services/${slug}`} image={guide.image} jsonLd={{ '@context': 'https://schema.org', '@type': 'Service', name: service.title, description: service.intro, serviceType: service.title, areaServed: { '@type': 'Country', name: 'United Arab Emirates' }, provider: { '@id': 'https://rnsshipping.com/#organization' }, url: `https://rnsshipping.com/services/${slug}` }} />
+    <Seo title={guide.heading} description={guide.description} path={`/services/${slug}`} image={guide.image} preloadImage={hero.src} preloadImageSrcSet={hero.srcSet} preloadImageSizes="100vw" jsonLd={{ '@context': 'https://schema.org', '@type': 'Service', name: service.title, description: service.intro, serviceType: service.title, areaServed: { '@type': 'Country', name: 'United Arab Emirates' }, provider: { '@id': 'https://rnsshipping.com/#organization' }, url: `https://rnsshipping.com/services/${slug}` }} />
     <section className="page-hero service-hero">
-      <img className="page-hero__photo" src={guide.heroImage || guide.image} alt="" width="1400" height="900" fetchpriority="high" />
+      <img className="page-hero__photo" src={hero.src} srcSet={hero.srcSet} sizes="100vw" alt="" width={hero.width} height={hero.height} fetchpriority="high" decoding="async" />
       <div className="page-hero__overlay" />
       <div className="container"><nav className="breadcrumb" aria-label="Breadcrumb"><Link to="/">Home</Link><span>/</span><Link to="/services">Services</Link><span>/</span><span aria-current="page">{service.title}</span></nav><h1>{guide.heading}</h1><p className="lead">{service.intro}</p><Link to={`/contact?service=${encodeURIComponent(service.title)}`} className="btn btn--accent">Discuss your requirement <Icon name="arrow" size={18} /></Link></div>
     </section>

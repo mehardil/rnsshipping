@@ -58,8 +58,10 @@ export default function Contact() {
             muted
             loop
             playsInline
-            preload="metadata"
-            poster="/images/contact-poster.jpg"
+            preload="none"
+            poster="/images/contact-poster.webp"
+            disablePictureInPicture
+            disableRemotePlayback
           >
             <source src="/images/contact_video.mp4" media="(min-width: 768px)" type="video/mp4" />
           </video>

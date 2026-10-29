@@ -24,7 +24,7 @@ Deploy the contents of `dist/` to a static host. Serve each route's own generate
 
 ## Insights portal
 
-The editorial portal lives at `/portal`. See [PORTAL.md](PORTAL.md) for local preview commands, production environment variables, publishing flow and the full URL list. Publishing requires the Netlify Functions in `netlify/functions/`; a plain static host will return 404 for `/api/login`.
+The editorial portal lives at `/portal`. See [PORTAL.md](PORTAL.md) for local preview commands, production environment variables, publishing flow and the full URL list. Publishing requires a server for `/api/*`: either the Netlify Functions in `netlify/functions/`, or the bundled Node server (`npm run build && npm start`) on a VPS. A plain static upload of `dist/` will return 404 for `/api/login`.
 
 ## Contact enquiries
 

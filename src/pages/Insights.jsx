@@ -6,6 +6,9 @@ import ArticleCard from '../components/ArticleCard'
 import { Icon } from '../components/Icons'
 import { articles, getAllTags } from '../lib/articles'
 
+const HERO_SRC = '/images/insights-hero-1800.webp'
+const HERO_SRCSET = '/images/insights-hero-640.webp 640w, /images/insights-hero-960.webp 960w, /images/insights-hero-1280.webp 1280w, /images/insights-hero-1800.webp 1800w'
+
 export default function Insights() {
   const [activeTag, setActiveTag] = useState('')
   const tags = useMemo(() => getAllTags(), [])
@@ -40,12 +43,24 @@ export default function Insights() {
         path="/insights"
         keywords="ship repair Dubai guide, ship cleaning Dubai, tank cleaning Jebel Ali, ship maintenance UAE, marine services insights"
         image={featured?.cover || '/images/marine-engine-room.webp'}
+        preloadImage="/images/insights-hero-1280.webp"
+        preloadImageSrcSet={HERO_SRCSET}
+        preloadImageSizes="100vw"
         jsonLd={jsonLd}
       />
 
       <section className="insights-hero">
         <div className="insights-hero__bg" aria-hidden="true">
-          <img src="/images/rns-port-cranes.webp" alt="" width="1600" height="900" fetchpriority="high" />
+          <img
+            src={HERO_SRC}
+            srcSet={HERO_SRCSET}
+            sizes="100vw"
+            alt=""
+            width="1800"
+            height="1013"
+            fetchpriority="high"
+            decoding="async"
+          />
         </div>
         <div className="container insights-hero__inner">
           <Reveal>

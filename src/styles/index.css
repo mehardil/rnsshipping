@@ -912,8 +912,11 @@
   padding: 56px;
   border-radius: 28px;
   background: linear-gradient(120deg, rgba(38, 39, 96, 0.94) 0%, rgba(20, 22, 58, 0.96) 100%),
-    url('/images/rns-port-aerial.webp') center / cover no-repeat;
+    url('/images/rns-port-aerial-1280.webp') center / cover no-repeat;
   color: #fff;
+}
+@media (max-width: 680px) {
+  .cta { background-image: linear-gradient(120deg, rgba(38, 39, 96, 0.94) 0%, rgba(20, 22, 58, 0.96) 100%), url('/images/rns-port-aerial-640.webp'); }
 }
 .cta::after {
   content: '';

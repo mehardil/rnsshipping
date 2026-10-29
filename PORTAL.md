@@ -42,6 +42,85 @@ Set these environment variables in Netlify:
 Netlify functions handle `/api/*`. A static host without functions will return 404 for login
 and publishing. This is the cause of "Request failed (404)" on a plain static deployment.
 
+## Production on a Hostinger VPS (Node.js)
+
+Uploading only `dist/` is not enough: the portal needs a server for `/api/*`. On a VPS, run the
+bundled Node server, which serves `dist/` and implements the portal API with local file writes.
+
+```sh
+npm ci
+npm run build
+npm start
+```
+
+`npm start` listens on `127.0.0.1:3000` by default. Put Nginx in front of it and proxy all
+requests, including `/api/*`. Do not add a separate static `try_files` block for `/api`.
+
+Environment file, for example `/etc/rns-portal.env`:
+
+```sh
+PORT=3000
+HOST=127.0.0.1
+NODE_ENV=production
+COOKIE_SECURE=true
+
+PORTAL_EMAIL=info@rns-shipping.com
+PORTAL_PASSWORD=replace-with-a-strong-password
+SESSION_SECRET=replace-with-openssl-rand-hex-32
+```
+
+`SESSION_SECRET` can be generated with `openssl rand -hex 32`.
+
+Set `NPM_BIN` and the systemd `ExecStart` path if Node is installed through nvm, because systemd
+does not load the shell profile. For example: `NPM_BIN=/home/USER/.nvm/versions/node/v22/bin/npm`
+and `ExecStart=/home/USER/.nvm/versions/node/v22/bin/npm start`.
+
+Systemd unit, for example `/etc/systemd/system/rns-portal.service`:
+
+```ini
+[Unit]
+Description=RNS Shipping site and editorial portal
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/USER/rnsshipping
+EnvironmentFile=/etc/rns-portal.env
+ExecStart=/usr/bin/npm start
+Restart=always
+RestartSec=5
+User=USER
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Nginx server block:
+
+```nginx
+server {
+    listen 443 ssl http2;
+    server_name rnsshipping.com www.rnsshipping.com;
+    client_max_body_size 8m;
+
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+```
+
+Publishing in this mode writes the Markdown file to `src/content/articles/`, copies uploads to
+`public/images/insights/`, and rebuilds `dist/` in the background. The service user must own the
+repository and have write access to `src/content/articles/`, `public/images/insights/` and
+`dist/`. The site is briefly rebuilding while a publish completes.
+
+Do not use the Netlify environment variables in this mode; `GITHUB_TOKEN` and
+`NETLIFY_BUILD_HOOK` are only for the serverless deployment.
+
 ## Public URLs
 
 | URL | Page |

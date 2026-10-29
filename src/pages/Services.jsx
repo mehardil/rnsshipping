@@ -26,7 +26,7 @@ export default function Services() {
         }}
       />
 
-      <section className="page-hero page-hero--media">
+      <section className="page-hero page-hero--media page-hero--services-video">
         <video
           className="page-hero__video"
           muted
@@ -34,6 +34,8 @@ export default function Services() {
           playsInline
           preload="none"
           poster="/images/hero-poster.webp"
+          disablePictureInPicture
+          disableRemotePlayback
           aria-hidden="true"
         >
           <source src="/videos/drydock.mp4" media="(min-width: 768px)" type="video/mp4" />

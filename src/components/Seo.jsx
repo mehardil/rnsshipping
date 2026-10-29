@@ -55,9 +55,12 @@ export default function Seo({
   author,
   section,
   tags = [],
+  preloadImage,
+  preloadImageSrcSet,
+  preloadImageSizes,
 }) {
   const collector = useContext(SeoContext)
-  if (collector) collector.current = { title, description, path, image, keywords, jsonLd, extraJsonLd, noindex, type, publishedTime, modifiedTime, author, section, tags }
+  if (collector) collector.current = { title, description, path, image, keywords, jsonLd, extraJsonLd, noindex, type, publishedTime, modifiedTime, author, section, tags, preloadImage, preloadImageSrcSet, preloadImageSizes }
   useEffect(() => {
     const fullTitle = title.includes(SITE) ? title : `${title} | ${SITE}`
     document.title = fullTitle
@@ -151,13 +154,19 @@ export function renderHead({
   author,
   section,
   tags = [],
+  preloadImage,
+  preloadImageSrcSet,
+  preloadImageSizes,
 }) {
   const fullTitle = title.includes(SITE) ? title : `${title} | ${SITE}`
   const url = ORIGIN + path
   const escape = text => String(text).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
   const meta = (name, content, attr = 'name') => `<meta ${attr}="${name}" content="${escape(content)}" />`
   const ld = (id, data) => `<script id="${id}" type="application/ld+json">${JSON.stringify(data).replace(/</g,'\\u003c')}</script>`
-  return `<title>${escape(fullTitle)}</title><link rel="canonical" href="${escape(url)}" />` +
+  const preload = preloadImage
+    ? `<link rel="preload" as="image" href="${escape(preloadImage)}"${preloadImageSrcSet ? ` imagesrcset="${escape(preloadImageSrcSet)}"` : ''}${preloadImageSizes ? ` imagesizes="${escape(preloadImageSizes)}"` : ''} fetchpriority="high" />`
+    : ''
+  return preload + `<title>${escape(fullTitle)}</title><link rel="canonical" href="${escape(url)}" />` +
     meta('description', description) + (keywords ? meta('keywords', keywords) : '') + meta('robots', noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large') +
     meta('og:title', fullTitle, 'property') + meta('og:description', description, 'property') + meta('og:url', url, 'property') + meta('og:type', type, 'property') + meta('og:site_name',SITE,'property') + meta('og:image',ORIGIN + image,'property') + meta('og:image:alt', title, 'property') +
     (type === 'article' && publishedTime ? meta('article:published_time', publishedTime, 'property') : '') +

@@ -7,6 +7,11 @@ import Regions from '../components/Regions'
 import { Icon } from '../components/Icons'
 import { company, stats, whyChoose, certifications, services } from '../data/site'
 
+const ABOUT_HERO_SRC = '/images/about-hero-1920.webp'
+const ABOUT_HERO_SRCSET = '/images/about-hero-640.webp 640w, /images/about-hero-960.webp 960w, /images/about-hero-1280.webp 1280w, /images/about-hero-1920.webp 1920w'
+const SHIP_SRC = '/images/rns-ship-dramatic-1920.webp'
+const SHIP_SRCSET = '/images/rns-ship-dramatic-640.webp 640w, /images/rns-ship-dramatic-960.webp 960w, /images/rns-ship-dramatic-1440.webp 1440w, /images/rns-ship-dramatic-1920.webp 1920w'
+
 export default function About() {
   return (
     <>
@@ -16,6 +21,9 @@ export default function About() {
         path="/about"
         keywords="marine service company Dubai, ship repair company in Dubai, marine engineering Khorfakkan, RNS Shipping"
         image="/images/harbour-evening.webp"
+        preloadImage="/images/about-hero-1280.webp"
+        preloadImageSrcSet={ABOUT_HERO_SRCSET}
+        preloadImageSizes="(max-width: 680px) 100vw, (max-width: 1500px) 1280px, 100vw"
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'AboutPage',
@@ -25,9 +33,18 @@ export default function About() {
         }}
       />
 
-      <section className="page-hero page-hero--media">
+      <section className="page-hero page-hero--media page-hero--about-photo">
         <div className="page-hero__bg" aria-hidden="true">
-          <img src="/images/about.webp" alt="" fetchpriority="high" decoding="async" />
+          <img
+            src={ABOUT_HERO_SRC}
+            srcSet={ABOUT_HERO_SRCSET}
+            sizes="(max-width: 680px) 100vw, (max-width: 1500px) 1280px, 100vw"
+            width="1920"
+            height="1344"
+            alt=""
+            fetchpriority="high"
+            decoding="async"
+          />
         </div>
         <div className="page-hero__overlay" />
         <div className="container">
@@ -49,16 +66,24 @@ export default function About() {
             <Reveal className="media-stack">
               <div className="media-stack__main">
                 <img
-                  src="/images/rns-ship-bow.webp"
+                  src={SHIP_SRC}
+                  srcSet={SHIP_SRCSET}
+                  sizes="(min-width: 961px) 50vw, 100vw"
+                  width="1920"
+                  height="940"
                   alt="Container ship underway, supported by RNS Shipping"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="media-stack__inset">
                 <img
                   src="/images/rns-warehouse.webp"
                   alt="RNS Shipping marine stores and spare parts warehouse"
+                  width="1192"
+                  height="476"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="media-stack__badge">

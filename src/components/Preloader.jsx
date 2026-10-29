@@ -15,18 +15,20 @@ export default function Preloader({ onDone }) {
       return
     }
 
+    const connection = navigator.connection
+    const skipIntro = prefersReducedMotion || connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType || '')
+
+    if (skipIntro) {
+      sessionStorage.setItem(SESSION_KEY, '1')
+      setGone(true)
+      onDone?.()
+      return
+    }
+
     document.body.style.overflow = 'hidden'
 
     const progress = { value: 0 }
     const tl = gsap.timeline()
-
-    if (prefersReducedMotion) {
-      setGone(true)
-      sessionStorage.setItem(SESSION_KEY, '1')
-      document.body.style.overflow = ''
-      onDone?.()
-      return
-    }
 
     tl.fromTo(
       rootRef.current.querySelector('.pl__logo'),
@@ -67,6 +69,8 @@ export default function Preloader({ onDone }) {
       setGone(true)
       onDone?.()
     })
+
+    tl.timeScale(1.75)
 
     return () => {
       tl.kill()
