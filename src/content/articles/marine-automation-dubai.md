@@ -155,8 +155,6 @@ Look for a provider that can explain the diagnostic method, not just the parts l
 
 RNS Shipping provides marine automation support for vessels in Dubai, Jebel Ali, Dubai Maritime City and Khorfakkan, alongside technical servicing and repair. The operations desk can review the fault report and mobilise the right specialist.
 
-## Conclusion
-
 Marine automation services in Dubai are most effective when the fault is described accurately and the system records are ready before the technician arrives. Name the alarm, explain the condition, protect the backups and test the repair. That discipline turns an intermittent fault into a solvable one.
 
 For an automation fault or a survey-preparation review, [contact the RNS Shipping operations team](/contact) or review the [marine automation service](/services/automation).

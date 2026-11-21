@@ -153,8 +153,6 @@ Look for a provider that can explain the system, not just the component. Ask how
 
 RNS Shipping provides ship technical services for vessels in Dubai, Jebel Ali, Dubai Maritime City and Khorfakkan, and can combine machinery work with [ship repair and maintenance](/services/ship-repair-maintenance) under one coordinator.
 
-## Conclusion
-
 Ship technical services in Dubai deliver lasting results when the fault is defined, the engine room is prepared and the repair is tested and recorded. Those steps cost little and prevent the repeat visit that always costs more.
 
 Send the equipment details, fault history and working window to the [RNS Shipping operations desk](/contact), or review the full [technical services](/services/technical-services) scope before you book.

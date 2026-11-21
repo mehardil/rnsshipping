@@ -141,8 +141,6 @@ Look for a provider that can explain the process, not just quote a price. Ask ho
 
 RNS Shipping provides ship chandelling alongside technical servicing and spare parts support for vessels in Dubai, Jebel Ali, Dubai Maritime City and Khorfakkan. For combined requirements, stores and technical items can be coordinated through one operations desk.
 
-## Conclusion
-
 Ship chandelling in Dubai works best when the order is precise and the delivery is confirmed in advance. Write the list, split the categories, name the receiver and check the paperwork before the vessel sails. Those small disciplines prevent most supply problems.
 
 For a chandelling quote or a combined stores and technical enquiry, [contact the RNS Shipping operations team](/contact). You can also review the full range of [ship chandelling services](/services/ship-chandelling) before you send your list.

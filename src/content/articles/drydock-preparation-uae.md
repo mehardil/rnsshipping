@@ -165,8 +165,6 @@ The yard is only one partner. Technical service providers, coating specialists, 
 
 RNS Shipping supports vessels in Dubai, Jebel Ali, Dubai Maritime City and Khorfakkan with [ship repair and maintenance](/services/ship-repair-maintenance), technical servicing and parts logistics. For managers comparing yards and providers, the guide to [ship repair companies in the UAE](/insights/ship-repair-companies-in-uae) explains what to compare before awarding work.
 
-## Conclusion
-
 Drydocking in the UAE rewards the vessel that arrives prepared. Write the specification, order the long-lead parts, coordinate class early and agree how changes and testing will be handled. The dock will still bring surprises, but they will be manageable ones.
 
 For drydock preparation support or a combined repair and parts plan, [contact the RNS Shipping operations team](/contact).

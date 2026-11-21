@@ -144,8 +144,6 @@ Look for a provider that can:
 
 RNS Shipping handles ship spare parts and logistics for vessels in Dubai, Jebel Ali, Dubai Maritime City and Khorfakkan, and can combine parts sourcing with [ship repair and maintenance](/services/ship-repair-maintenance) so the vessel is not waiting twice.
 
-## Conclusion
-
 Ship spare parts and logistics in Dubai reward accuracy. Identify the part properly, ask for the route and lead time, confirm clearance and plan the handover before the vessel arrives. Most of the delays that feel like bad luck are actually gaps that were visible from the start.
 
 Send the part details, vessel particulars and delivery window to the [RNS Shipping operations desk](/contact), or review the [spare parts and logistics service](/services/spare-parts-logistics) to see how sourcing and delivery are coordinated.
